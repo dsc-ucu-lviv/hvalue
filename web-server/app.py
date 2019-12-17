@@ -1,16 +1,14 @@
 from flask import Flask, render_template, request
-from os import path
 
 app = Flask(__name__)
-tasks = ["eat", "sleep", "have fun", "learn", "grow", "code", "compete", "dream", "travel", "help"]
 
 
-@app.route('/')
+@app.route("/")
 def render_main_page():
-    return render_template('main.html')
+    return render_template("main.html")
 
 
-@app.route('/my-todo-list', methods=['GET', 'POST'])
+@app.route("/my-todo-list", methods=["GET", "POST"])
 def add_new_task():
     return render_template("todo_list.html",
                            name=request.form.get("name"))
