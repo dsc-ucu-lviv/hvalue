@@ -2,7 +2,7 @@
 
 Agenda  | 
 ------------- | 
-[How to how in this repository](https://github.com/dsc-ucu-lviv/hvalue/wiki/How-to-work.-Instruction.)  | 
+[How to work in this repository](https://github.com/dsc-ucu-lviv/hvalue/wiki/How-to-work.-Instruction.)  | 
 [Database architecture](#database-architecture)  | 
 
 ## Database architecture
