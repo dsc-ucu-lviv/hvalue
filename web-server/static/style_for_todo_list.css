@@ -1,0 +1,27 @@
+main.new_task_box {
+    background-color: whitesmoke;
+    border: solid 1rem darkturquoise;
+    padding: 0.5rem;
+}
+
+main.new_task_box > h4 {
+    color: darkturquoise;
+    display: block;
+    width: 100%;
+    margin: 1rem;
+}
+
+main.new_task_box > form {
+    text-align: center;
+    align-items: center;
+}
+
+main.new_task_box > form > * {
+    height: 1.5rem;
+}
+
+main.new_task_box > form > button {
+    background-color: darkturquoise;
+    color: whitesmoke;
+    font-weight: bold;
+}

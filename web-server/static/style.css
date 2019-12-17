@@ -1,0 +1,19 @@
+body {
+    background-color: aliceblue;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body * {
+    font-family: inherit;
+}
+
+body > main {
+    width: 80%;
+    margin: auto;
+}
+
+main {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
