@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DCS Flask wp</title>
+</head>
+<body>
+    <main class="login_centred_box">
+        <h1>Sign up:</h1>
+
+        <form action="{{ url_for('registration.registration') }}" method="POST">
+            <input name="name"
+                   type="text"
+                   placeholder="username"
+                   aria-label="username"
+                   autocomplete="off"/>
+            <input name="email"
+                   type="text"
+                   placeholder="email"
+                   aria-label="email"
+                   autocomplete="off"/>
+            <input name="phone_number"
+                   type="text"
+                   placeholder="phone number"
+                   aria-label="phone number"
+                   autocomplete="off"/>
+            <input name="password"  type="password" placeholder="password"  aria-label="password" />
+            <button type="submit" aria-label="Next"> Sign up </button>
+        </form>
+        <a href = "{{ url_for('login.login') }}">Log in</a>
+        {% if error %}
+        <label class=error><strong>Error:</strong> {{ error }}</label>
+        {% endif %}
+    </main>
+</body>
+
+</html>

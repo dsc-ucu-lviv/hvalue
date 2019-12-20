@@ -5,7 +5,7 @@ login_page = Blueprint('login', __name__, template_folder='templates')
 users = {'sofiia': '123'}
 
 
-@login_page.route("/", methods=["GET", "POST"])
+@login_page.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         if request.form.get("name") in users:
@@ -15,8 +15,13 @@ def login():
                 return redirect(url_for('login.hello'))
             else:
                 print('password not ok')
+                error = 'enter password'
+                return render_template('login.html', error=error)
         else:
             print('user is not ok')
+            error = 'enter right username'
+            return render_template('login.html', error=error)
+
     return render_template("login.html")
 
 

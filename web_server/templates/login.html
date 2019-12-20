@@ -13,7 +13,7 @@
 </head>
 <body>
     <main class="login_centred_box">
-        <h1> Log in or Sign up:</h1>
+        <h1> Log in:</h1>
 
         <form action="{{ url_for('login.login') }}" method="POST">
             <input name="name"
@@ -22,8 +22,12 @@
                    aria-label="user name"
                    autocomplete="off"/>
             <input name="password"  type="password" placeholder="password"  aria-label="password" />
-            <button type="submit" aria-label="Next"> Next </button>
+            <button type="submit" aria-label="Next"> Log in </button>
         </form>
+        <a href = "{{ url_for('login.hello') }}">Sign up</a>
+        {% if error %}
+        <label class=error><strong>Error:</strong> {{ error }}</label>
+        {% endif %}
     </main>
 </body>
 
