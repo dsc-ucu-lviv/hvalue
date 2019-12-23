@@ -9,16 +9,12 @@ users = {'sofiia': '123'}
 def login():
     if request.method == "POST":
         if request.form.get("name") in users:
-            print('user is ok')
             if request.form.get("password") == users[request.form.get("name")]:
-                print('password is ok')
                 return redirect(url_for('login.hello'))
             else:
-                print('password not ok')
                 error = 'enter password'
                 return render_template('login.html', error=error)
         else:
-            print('user is not ok')
             error = 'enter right username'
             return render_template('login.html', error=error)
 

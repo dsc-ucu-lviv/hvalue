@@ -24,7 +24,7 @@
             <input name="password"  type="password" placeholder="password"  aria-label="password" />
             <button type="submit" aria-label="Next"> Log in </button>
         </form>
-        <a href = "{{ url_for('login.hello') }}">Sign up</a>
+        <a href = "{{ url_for('registration.registration') }}">Sign up</a>
         {% if error %}
         <label class=error><strong>Error:</strong> {{ error }}</label>
         {% endif %}
