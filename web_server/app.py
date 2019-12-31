@@ -9,7 +9,6 @@ app.register_blueprint(registration_page)
 app.register_blueprint(login_page)
 
 
-
 @app.route("/")
 def render_main_page():
     return redirect(url_for('login'))
