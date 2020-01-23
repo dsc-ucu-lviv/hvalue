@@ -1,0 +1,21 @@
+aside 
+{
+    float: left;
+    width: 200px;
+    height: 9500px;
+    background: white;
+    /* border-left: solid 2px black; */
+    border-bottom: black;
+    border-bottom-left-radius: 1em;
+}
+
+
+header
+{
+    float: inline-start;
+    width: 1200px;
+    height: 120px;
+    background: rgb(27, 117, 102);
+    color: white;
+
+}
