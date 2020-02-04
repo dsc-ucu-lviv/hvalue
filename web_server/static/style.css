@@ -1,0 +1,18 @@
+body {
+    background-color: aliceblue;
+}
+
+body * {
+    font-family: inherit;
+}
+
+body > main {
+    width: 80%;
+    margin: auto;
+}
+
+main {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
