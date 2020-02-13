@@ -1,44 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-       /* Set the size of the div element that contains the map */
-      #map {
-        height: 400px;  /* The height is 400 pixels */
-        width: 100%;  /* The width is the width of the web page */
-       }
-    </style>
-  </head>
-  <body>
-    <h3>My Google Maps Demo</h3>
-    <!--The div element for the map -->
-    <div id="map"></div>
+<head>
+<meta charset="utf-8" />
+<title>Display a map</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script type="text/javascript">
+	mapboxgl.accessToken = 'pk.eyJ1IjoiaGVyYXN5bXVrNzk5IiwiYSI6ImNrNmtremNqajAwbXMzc3A2cG1zb2hxcXoifQ.xfMFAnbJwSq0KSMJKYR8HQ';
+    var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+    center: [24.0297, 49.8397], // starting position [lng, lat]
+    zoom: 12 // starting zoom
+    });
 
-    <script type="text/javascript">
-// Initialize and add the map
-function initMap() {
-    // var user = JSON.parse('{"rightQuotes": 5}');
-    // var user = JSON.parse();
-    // var x = {{coords.lat}};
-    // console.log(JSON.parse({{coords|safe}}));
-    console.log(x);
-    // The location of Uluru
-    var uluru = {lat: '{{ coords[0] }}', lng: parseInt('{{ coords[1] }}')};
-    console.log(uluru);
-    // The map, centered at Uluru
-    var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
-    // The marker, positioned at Uluru
-    var marker = new google.maps.Marker({position: uluru, map: map});
-}
-    </script>
-    <!--Load the API from the specified URL
-    * The async attribute allows the browser to render the page while the API loads
-    * The key parameter will contain your own API key (which is not needed for this tutorial)
-    * The callback parameter executes the initMap() function
-    -->
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU2-WIyN8CLq6TFDNw2IIMrAkWYI05gFk&callback=initMap">
-    </script>
-  </body>
+    var arr_sites ='{{ coords | tojson | safe }}';
+    // var arr_sites = JSON.parse('{{ coords  | tojson | safe }}');
+//     arr_sites.forEach(function(entry) {
+//   console.log(entry);
+// });
+    console.log(arr_sites);
+    let arr_markers = [];
+    for ( var item in arr_sites) {
+        // The location of Uluru
+        console.log(item);
+        var site = JSON.parse(item);
+        console.log(site);
+        var uluru = {lat: site.lat, lng: site.lat};
+        console.log(uluru);
+        var infowindow = new mapboxgl.InfoWindow({
+            content: contentString
+        });
+
+        // The marker, positioned at Uluru
+        var marker = new mapboxgl.Marker({
+            position: uluru,
+            map: map,
+            title: site.company_title
+        });
+        arr_markers.push(marker);
+
+        marker.addListener('click', function() {
+        infowindow.open(map, marker);
+        });
+    }
+
+
+</script>
+
+</body>
 </html>

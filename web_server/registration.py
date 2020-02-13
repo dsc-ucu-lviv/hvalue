@@ -21,7 +21,7 @@ def registration():
             elif parameter != "name":
                 users[request.form.get("name")][parameter] = request.form.get(parameter)
         print(users)
-        return redirect(url_for('login.hello'))
+        return redirect(url_for('map.map'))
 
     return render_template("registration.html", error=False)
 
