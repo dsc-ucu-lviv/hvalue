@@ -14,47 +14,78 @@
 <body>
 <div id="map"></div>
 <script type="text/javascript">
-	mapboxgl.accessToken = 'pk.eyJ1IjoiaGVyYXN5bXVrNzk5IiwiYSI6ImNrNmtremNqajAwbXMzc3A2cG1zb2hxcXoifQ.xfMFAnbJwSq0KSMJKYR8HQ';
-    var map = new mapboxgl.Map({
-    container: 'map', // container id
-    style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-    center: [24.0297, 49.8397], // starting position [lng, lat]
-    zoom: 12 // starting zoom
-    });
+    function initMap() {
+            var map = new google.maps.Map(
+              document.getElementById('map'), {
+                    zoom: 12,
+                    center: {lat: 49.8397, lng: 24.0297}
+                });
+            // The marker, positioned at Uluru
 
-    var arr_sites ='{{ coords | tojson | safe }}';
-    // var arr_sites = JSON.parse('{{ coords  | tojson | safe }}');
-//     arr_sites.forEach(function(entry) {
-//   console.log(entry);
-// });
-    console.log(arr_sites);
-    let arr_markers = [];
-    for ( var item in arr_sites) {
-        // The location of Uluru
-        console.log(item);
-        var site = JSON.parse(item);
-        console.log(site);
-        var uluru = {lat: site.lat, lng: site.lat};
-        console.log(uluru);
-        var infowindow = new mapboxgl.InfoWindow({
-            content: contentString
-        });
+            // var map = new mapboxgl.Map({
+            //     container: 'map', // container id
+            //     style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+            //     center: [24.0297, 49.8397], // starting position [lng, lat]
+            //     zoom: 12 // starting zoom
+            // });
 
-        // The marker, positioned at Uluru
-        var marker = new mapboxgl.Marker({
-            position: uluru,
-            map: map,
-            title: site.company_title
-        });
-        arr_markers.push(marker);
+            const stationsData ='{{ coords | tojson | safe }}';
+            console.log(stationsData);
+            const stationsDataArr = [];
+            // var arr_sites = JSON.parse('{{ coords  | tojson | safe }}');
+        //     arr_sites.forEach(function(entry) {
+        //   console.log(entry);
+        // });
+            console.log(stationsDataArr);
+            for ( const item in stationsData) {
+                // The location of Uluru
+                console.log(item);
+                var site = JSON.parse(item);
+                console.log(site);
+                var uluru = {lat: site.lat, lng: site.lat};
+                console.log(uluru);
+                var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<div id="bodyContent">'+
+                      '<p><b>Організація: </b>{}</p>'.format(site.organization_name) +
+                      '<p><b>Потребують: </b>{}</p>'.format(site.needs) +
+                        '<style>' +
+                            '.text {' +
+                            'text-align:  right;}' +
+                        '</style>' +
+                      '<p class="text-align"><a href={}>'.format(site.url)+
+                      'Сторінка організації</a></p>'+
+                      '</div>'+
+                      '</div>';
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
 
-        marker.addListener('click', function() {
-        infowindow.open(map, marker);
-        });
+                // The marker, positioned at Uluru
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map,
+                    title: site.organization_name
+                });
+                // var marker = new mapboxgl.Marker({
+                //     position: uluru,
+                //     map: map,
+                //     title: site.company_title
+                // });
+                stationsDataArr.push(marker);
+
+                marker.addListener('click', function() {
+                    infowindow.open(map, marker);
+                });
+            }
     }
 
-
 </script>
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU2-WIyN8CLq6TFDNw2IIMrAkWYI05gFk&callback=initMap">
+    </script>
 
 </body>
 </html>
