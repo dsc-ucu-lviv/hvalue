@@ -1,3 +1,5 @@
+import hashlib
+
 from database.db_base import DBBase
 
 
@@ -23,10 +25,9 @@ class DBAuth(DBBase):
         if self._get_user_info(user_dict['email']) is not None:
             raise UserAlreadyExists
 
-        # In case there other unrelevant keys in user_dict -> creating new dict
+        # In case there other irrelevant keys in user_dict -> creating new dict
         new_user_dict = {'email': user_dict['email'],
-                         # TODO: password hashing
-                         'password': user_dict['password'],
+                         'password': hashlib.sha256(str(user_dict['password']).encode('utf-8')).hexdigest(),
                          'username': user_dict['username'],
                          'type_id': 0}
 
@@ -47,8 +48,7 @@ class DBAuth(DBBase):
         if user_info is None:
             raise UserDoesNotExists
 
-        # TODO: password hashing
-        if user_dict['password'] == user_info[1]['password']:
+        if hashlib.sha256(str(user_dict['password']).encode('utf-8')).hexdigest() == user_info[1]['password']:
             return user_info[0]
 
     def _get_user_info(self, email):
