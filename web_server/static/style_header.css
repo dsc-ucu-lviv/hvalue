@@ -1,5 +1,5 @@
 header {
-    background-color: #3F3A85;
+    background-color: var(--dark-violet);
     height: 5rem;
     display: flex;
     justify-content: space-between;
@@ -31,7 +31,7 @@ header > .profile_info > .profile_info__name {
 }
 
 div.profile_info > details > nav {
-    background-color: #6962E0;
+    background-color: var(--light-violet);
     position: absolute;
     width: 10rem;
     margin-left: -7rem;
@@ -69,6 +69,6 @@ header > .profile_info > details > summary > .profile_info__icon {
 
 
 details > nav > ul > li > a {
-    color: #3F3A85;
+    color: var(--dark-violet);
     text-decoration: none;
 }
