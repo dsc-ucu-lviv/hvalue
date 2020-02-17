@@ -26,7 +26,7 @@ header > .profile_info > * {
 }
 
 header > .profile_info > .profile_info__name {
-    color: #FDF3F5;
+    color: var(--bright-powder);
     font-size: 24px;
 }
 
@@ -64,7 +64,7 @@ header > .profile_info > details > summary > .user_info__photo {
 }
 
 header > .profile_info > details > summary > .profile_info__icon {
-    color: #FDF3F5;
+    color: var(--bright-powder);
 }
 
 
