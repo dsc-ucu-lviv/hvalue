@@ -23,4 +23,4 @@ def login():
 
 @login_page.route("/hello", methods=['GET'])
 def hello():
-    return render_template("hello.html", profile_info={'profile_name': 'Elena', 'profile_img_link': 'https://avatars3.githubusercontent.com/u/35200816?s=460&v=4'})
+    return render_template("hello.html")
