@@ -57,7 +57,7 @@ summary::-webkit-details-marker {
     display: none;
 }
 
-header > .profile_info > details > summary > .user_info__photo {
+header > .profile_info > details > summary > .profile_info__photo {
     height: 3rem;
     width: 3rem;
     border-radius: 50%;
