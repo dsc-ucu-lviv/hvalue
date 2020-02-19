@@ -1,7 +1,9 @@
 header {
     background-color: var(--dark-violet);
     height: 5rem;
-    display: flex;
+    /* inline is needed for parent to occupy full width even if content is overflowing
+    (see https://stackoverflow.com/questions/38427794/div-background-color-cuts-off-at-viewport-with-doctype) */
+    display: inline-flex;
     justify-content: space-between;
     align-items: center;
 }
