@@ -4,6 +4,7 @@ header {
     /* inline is needed for parent to occupy full width even if content is overflowing
     (see https://stackoverflow.com/questions/38427794/div-background-color-cuts-off-at-viewport-with-doctype) */
     display: inline-flex;
+    min-width: 100%;
     justify-content: space-between;
     align-items: center;
 }
