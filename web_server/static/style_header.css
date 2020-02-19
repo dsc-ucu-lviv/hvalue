@@ -1,0 +1,77 @@
+header {
+    background-color: var(--dark-violet);
+    height: 5rem;
+    /* inline is needed for parent to occupy full width even if content is overflowing
+    (see https://stackoverflow.com/questions/38427794/div-background-color-cuts-off-at-viewport-with-doctype) */
+    display: inline-flex;
+    min-width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+header > * {
+    margin: 0 1.25rem;
+}
+
+header > a > img.logo {
+    height: 4rem;
+    width: auto;
+}
+
+header > .profile_info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+header > .profile_info > * {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+header > .profile_info > .profile_info__name {
+    color: var(--bright-powder);
+    font-size: 24px;
+}
+
+div.profile_info > details > nav {
+    background-color: var(--light-violet);
+    position: absolute;
+    width: 10rem;
+    margin-left: -7rem;
+}
+
+details > nav > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+details > nav > ul > li {
+    padding: 0.5rem;
+    text-align: center;
+}
+
+summary {
+    width: 3rem;
+    text-align: center;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+header > .profile_info > details > summary > .profile_info__photo {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+}
+
+header > .profile_info > details > summary > .profile_info__icon {
+    color: var(--bright-powder);
+}
+
+
+details > nav > ul > li > a {
+    color: var(--dark-violet);
+    text-decoration: none;
+}

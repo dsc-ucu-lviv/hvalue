@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet"
-          type="text/css"
-          href="static/style_for_main.css"/>
-    <link rel="stylesheet"
-          type="text/css"
-          href="static/style.css"/>
-    <title>DCS Flask wp</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block main %}
     <main class="login_centred_box">
         <h1> Log in:</h1>
 
@@ -29,6 +18,4 @@
         <label class=error><strong>Error:</strong> {{ error }}</label>
         {% endif %}
     </main>
-</body>
-
-</html>
+{% endblock %}
