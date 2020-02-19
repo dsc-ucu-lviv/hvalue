@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css"
-          href="{{ url_for('static', filename='style_header.css') }}"/>
-    <link rel="stylesheet" type="text/css"
           href="{{ url_for('static', filename='style.css') }}"/>
     <link rel="stylesheet" type="text/css"
           href="{{ url_for('static', filename='color_definitions.css') }}"/>
@@ -16,35 +14,6 @@
     <title>DCS Flask wp</title>
 </head>
 <body>
-   <header>
-       <a>
-           <img class="logo" src="https://firebasestorage.googleapis.com/v0/b/hvalue-310c1.appspot.com/o/mockups%2Flogo.png?alt=media&token=eea1b2b7-1eca-43bb-b9ff-93a9a9dcdddd"
-                alt="logo"
-                aria-label="Logo picture of H-Value organization">
-       </a>
-       <div class="profile_info">
-           <p class="profile_info__name"> {{ name }} </p>
-           <details>
-               <summary>
-                   {% if user_info and user_info.profile_img_link %}
-                       <img class="user_info__photo"
-                            src="{{ user_info.profile_img_link }}"
-                            alt="Profile photo."
-                            aria-label="Profile photo"/>
-                   {% else %}
-                       <i class="material-icons person-64 profile_info__icon"
-                          aria-label="Default profile icon"> person </i>
-                   {% endif %}
-               </summary>
-               <nav>
-                   <ul>
-                       <li> <a href="#"> exit </a> </li>
-                   </ul>
-               </nav>
-           </details>
-       </div>
-   </header>
-
     <main class="login_centred_box">
         <h1>Sign up:</h1>
 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style_header.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='color_definitions.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=EB+Garamond" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>DSC Flask wp</title>
+</head>
+
+<body>
+    <header>
+        <a href="#">  {# todo(issue_#10, issue_#24) - Add link to the overview page. #}
+            <img class="logo"
+                 src="https://firebasestorage.googleapis.com/v0/b/hvalue-310c1.appspot.com/o/mockups%2Flogo.png?alt=media&token=eea1b2b7-1eca-43bb-b9ff-93a9a9dcdddd"
+                 alt="logo"
+                 aria-label="logo of H-Value organization"> </a>
+
+        <div class="profile_info">
+
+            {% if profile_info is defined %}
+                <p class="profile_info__name"> {{ profile_info['profile_name'] }} </p>
+                <details>
+                    <summary>
+                        <img class="profile_info__photo"
+                             src="{{ profile_info['profile_img_link'] }}"
+                             alt="Profile photo."
+                             aria-label="Profile photo"/>
+                    </summary>
+                    <nav>
+                        <ul>
+                            {# todo(issue_#23) - Add navigation options for signed-in user. #}
+                            {# <li> <a href="#"> ... </a> </li> #}
+                        </ul>
+                    </nav>
+                </details>
+
+            {% else %}
+                <details>
+                    <summary>
+                        <i class="material-icons person-64 profile_info__icon" aria-label="Default profile icon"> person </i>
+                    </summary>
+                    <nav>
+                        <ul>
+                            {# todo(issue_#23) - Add navigation options. #}
+                            {# <li> <a href="#"> ... </a> </li> #}
+                        </ul>
+                    </nav>
+                </details>
+
+            {% endif %}
+        </div>
+    </header>
+
+    {% block main %} {% endblock %}
+
+</body>
+</html>

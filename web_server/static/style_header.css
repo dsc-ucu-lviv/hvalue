@@ -49,7 +49,7 @@ details > nav > ul > li {
 }
 
 summary {
-    min-width: 3rem;
+    width: 3rem;
     text-align: center;
 }
 
