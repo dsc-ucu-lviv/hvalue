@@ -15,69 +15,55 @@
 <div id="map"></div>
 <script type="text/javascript">
     function initMap() {
-            var map = new google.maps.Map(
+            let map = new google.maps.Map(
               document.getElementById('map'), {
                     zoom: 12,
                     center: {lat: 49.8397, lng: 24.0297}
                 });
-            // The marker, positioned at Uluru
-
-            // var map = new mapboxgl.Map({
-            //     container: 'map', // container id
-            //     style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-            //     center: [24.0297, 49.8397], // starting position [lng, lat]
-            //     zoom: 12 // starting zoom
-            // });
 
             const stationsData ='{{ coords | tojson | safe }}';
-            console.log(stationsData);
-            const stationsDataArr = [];
-            // var arr_sites = JSON.parse('{{ coords  | tojson | safe }}');
-        //     arr_sites.forEach(function(entry) {
-        //   console.log(entry);
-        // });
-            console.log(stationsDataArr);
-            for ( const item in stationsData) {
-                // The location of Uluru
-                console.log(item);
-                var site = JSON.parse(item);
-                console.log(site);
-                var uluru = {lat: site.lat, lng: site.lat};
-                console.log(uluru);
-                var contentString = '<div id="content">'+
+            const stationsDataArr = JSON.parse(stationsData);
+
+            let markersArr = Array();
+            let infoWindowsArr = Array();
+            for ( const item in stationsDataArr) {
+
+                const contentString = '<div id="content">'+
                       '<div id="siteNotice">'+
                       '</div>'+
                       '<div id="bodyContent">'+
-                      '<p><b>Організація: </b>{}</p>'.format(site.organization_name) +
-                      '<p><b>Потребують: </b>{}</p>'.format(site.needs) +
+                      '<p><b>Організація: </b>'+ stationsDataArr[item].organization_name +'</p>' +
+                      '<p><b>Потребують: </b>'+ stationsDataArr[item].needs +'</p>' +
                         '<style>' +
                             '.text {' +
                             'text-align:  right;}' +
                         '</style>' +
-                      '<p class="text-align"><a href={}>'.format(site.url)+
+                      '<p class="text-align"><a href='+ stationsDataArr[item].url +'>'+
                       'Сторінка організації</a></p>'+
                       '</div>'+
                       '</div>';
-                var infowindow = new google.maps.InfoWindow({
+                let infoWindow = new google.maps.InfoWindow({
                     content: contentString
                 });
 
-                // The marker, positioned at Uluru
-                var marker = new google.maps.Marker({
-                    position: uluru,
-                    map: map,
-                    title: site.organization_name
-                });
-                // var marker = new mapboxgl.Marker({
-                //     position: uluru,
-                //     map: map,
-                //     title: site.company_title
-                // });
-                stationsDataArr.push(marker);
+                infoWindowsArr.push(infoWindow);
 
-                marker.addListener('click', function() {
-                    infowindow.open(map, marker);
+                let marker = new google.maps.Marker({
+                    position: {lat: stationsDataArr[item].lat, lng: stationsDataArr[item].lng},
+                    map: map,
+                    title: stationsDataArr[item].organization_name
                 });
+
+                marker.addListener(
+                    "mouseover", function() {infoWindow.open(map, marker);}
+                );
+
+                marker.addListener(
+                    "mouseout", function() {infoWindow.close(map, marker);}
+                );
+
+                markersArr.push(marker);
+
             }
     }
 
