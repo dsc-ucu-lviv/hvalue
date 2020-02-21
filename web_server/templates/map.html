@@ -1,77 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>Display a map</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-<script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
-<link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
-<style>
-	body { margin: 0; padding: 0; }
-	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-</style>
+    <title>Display a map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style_for_map.css') }}"/>
 </head>
 <body>
-<div id="map"></div>
-<script type="text/javascript">
-    function initMap() {
+    <div id="map"></div>
+    <script type="text/javascript">
+        function initMap() {
+            let cityCenterCoords ='{{ city_center_coords | tojson | safe }}';
+            cityCenterCoords = JSON.parse(cityCenterCoords);
+
             let map = new google.maps.Map(
               document.getElementById('map'), {
                     zoom: 12,
-                    center: {lat: 49.8397, lng: 24.0297}
+                    center: cityCenterCoords
                 });
 
             const stationsData ='{{ coords | tojson | safe }}';
             const stationsDataArr = JSON.parse(stationsData);
 
-            let markersArr = Array();
-            let infoWindowsArr = Array();
-            for ( const item in stationsDataArr) {
-
-                const contentString = '<div id="content">'+
-                      '<div id="siteNotice">'+
-                      '</div>'+
-                      '<div id="bodyContent">'+
-                      '<p><b>Організація: </b>'+ stationsDataArr[item].organization_name +'</p>' +
-                      '<p><b>Потребують: </b>'+ stationsDataArr[item].needs +'</p>' +
-                        '<style>' +
-                            '.text {' +
-                            'text-align:  right;}' +
-                        '</style>' +
-                      '<p class="text-align"><a href='+ stationsDataArr[item].url +'>'+
-                      'Сторінка організації</a></p>'+
-                      '</div>'+
-                      '</div>';
-                let infoWindow = new google.maps.InfoWindow({
-                    content: contentString
-                });
-
-                infoWindowsArr.push(infoWindow);
-
-                let marker = new google.maps.Marker({
-                    position: {lat: stationsDataArr[item].lat, lng: stationsDataArr[item].lng},
+            let markersArr = Array.from(stationsDataArr, (station) => new google.maps.Marker({
+                    position: {lat: station.lat, lng: station.lng},
                     map: map,
-                    title: stationsDataArr[item].organization_name
-                });
+                    title: station.organization_name
+                })
+            );
 
+            let infoWindowsArr = Array.from(stationsDataArr, (station) => new google.maps.InfoWindow({
+                content: '<div id="content">'+
+                  '<div id="siteNotice">'+
+                  '</div>'+
+                  '<div id="bodyContent">'+
+                  `<p><b>Організація: </b> ${station.organization_name} </p>` +
+                  `<p><b>Потребують: </b> ${station.needs} </p>` +
+                    '<style>' +
+                        '.text {' +
+                        'text-align:  right;}' +
+                    '</style>' +
+                  `<p class="text-align"><a href='${station.url}'>`+
+                  'Сторінка організації</a></p>'+
+                  '</div>'+
+                  '</div>'
+                })
+            );
+
+            markersArr.forEach((marker, index) => {
                 marker.addListener(
-                    "mouseover", function() {infoWindow.open(map, marker);}
-                );
-
-                marker.addListener(
-                    "mouseout", function() {infoWindow.close(map, marker);}
-                );
-
-                markersArr.push(marker);
-
-            }
+                    "click", function () {
+                        infoWindowsArr[index].open(map, marker);
+                    }
+                )
+            });
     }
-
-</script>
-
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU2-WIyN8CLq6TFDNw2IIMrAkWYI05gFk&callback=initMap">
     </script>
-
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU2-WIyN8CLq6TFDNw2IIMrAkWYI05gFk&callback=initMap">
+        </script>
 </body>
 </html>

@@ -11,4 +11,5 @@ def map():
                              {"organization_name": "UCU Colegium", "lat": 49.818160, "lng": 24.022621,
                               "needs": 'help', "url": 'https://cms.ucu.edu.ua/course/view.php?id=2348'}]
 
-    return render_template("map.html", coords=companies_information)
+    return render_template("map.html", coords=companies_information,
+                           city_center_coords={"lat": 49.8397, "lng": 24.0297})
