@@ -28,7 +28,7 @@ class DBMap:
         """
         Return all available receiver_station in database that match requirements.
         rcv_station_dict = {'city_id': int,
-                            'receive_station_type': str,
+                            'receive_station_type': list(receive_station_id),
                             'time_from': str,
                             'time_to': str,
                             'categories': list(categories_id)}
