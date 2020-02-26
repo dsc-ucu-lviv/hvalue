@@ -1,7 +1,6 @@
 from web_server.login import login_page
 from web_server.registration import registration_page
 
-
 from flask import Flask, redirect, url_for
 
 app = Flask(__name__)

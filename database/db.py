@@ -13,3 +13,6 @@ class Database:
 
         self.db_auth = DBAuth(self.database)
         self.db_map = DBMap(self.database)
+
+
+db = Database()
