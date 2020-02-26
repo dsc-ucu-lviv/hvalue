@@ -1,10 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 
+from database.db import db
 import database.db_auth as db_auth
 
 login_page = Blueprint('login', __name__, template_folder='templates')
-
-from database.db import db
 
 
 @login_page.route("/login", methods=["GET", "POST"])
