@@ -21,15 +21,20 @@ def registration():
             error = 'passwords do not match'
             return render_template('registration.html', error=error)
 
-        user_dict = {'email': request.form.get("email"),
-                     'password': request.form.get("password1"),
-                     'username': request.form.get("name")}
+        if ('@' and '.') in request.form.get("email"):
+            user_dict = {'email': request.form.get("email"),
+                         'password': request.form.get("password1"),
+                         'username': request.form.get("name")}
 
-        try:
-            db.db_auth.add_new_user(user_dict)
-            return redirect(url_for("login.login"))
-        except db_auth.UserAlreadyExists:
-            error = 'user already exists'
+            try:
+                db.db_auth.add_new_user(user_dict)
+                return redirect(url_for("login.login"))
+            except db_auth.UserAlreadyExists:
+                error = 'user already exists'
+                return render_template('login.html', error=error)
+
+        else:
+            error = 'enter right email'
             return render_template('login.html', error=error)
 
     return render_template("registration.html", error=False)
