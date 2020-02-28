@@ -28,12 +28,8 @@
                    placeholder="email"
                    aria-label="email"
                    autocomplete="off"/>
-            <input name="phone number"
-                   type="text"
-                   placeholder="phone number"
-                   aria-label="phone number"
-                   autocomplete="off"/>
-            <input name="password"  type="password" placeholder="password"  aria-label="password" />
+            <input name="password1"  type="password" placeholder="password"  aria-label="password" />
+            <input name="password2"  type="password" placeholder="password"  aria-label="password" />
             <button type="submit" aria-label="Next"> Sign up </button>
         </form>
         <a href = "{{ url_for('login.login') }}">Log in</a>
