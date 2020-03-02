@@ -1,7 +1,9 @@
-class DBMap:
+from database.db_base import DBBase
+
+
+class DBMap(DBBase):
     def __init__(self, database):
-        self.db = database
-        # super(DBMap, self).__init__()
+        super().__init__(database)
 
     def get_cities(self):
         """
@@ -28,8 +30,8 @@ class DBMap:
         """
         Return all available receiver_station in database that match requirements.
         rcv_station_dict = {'city_id': int,
-                            'receive_station_type': list(receive_station_id),
                             'time_from': str,
+                            'type_id': list(int),
                             'time_to': str,
                             'categories': list(categories_id)}
         :return: (dict) {receiver_station_type_id: {user_id: int,
@@ -41,74 +43,38 @@ class DBMap:
                                                     categories: list(int),
                                                     items: list(int)}, ...}
         """
-        response = self.db.get("receiver_stations", None)
-        self.checking(rcv_station_dict, response)
-        return response
+        response = self.db.get("receive_stations", None)
+        return list(filter(lambda x: self.checking(rcv_station_dict, x), response))
 
-    def checking(self, user_station, stations):
+    def checking(self, user_station, station):
         """
         Return all suitable for a user stations,
         otherwise return []
         :param user_station: dict = {(str): int, (str): (str), ...}
-        :param stations:  dict = {(str): list, (str): (int), (str): (str), ...}
+        :param station:  dict = {(str): list, (str): (int), (str): (str), ...}
         :return: list = [(dict), ...]
         """
-        suitable_stations = []
-        for station in stations:
-            if self._data_intersection(user_station['categories'], station['categories']):
-                if self._data_intersection(user_station['city_id'], station['locations']):
-                    if self._data_intersection(user_station['receive_station_type'], station['type_id']):
+        user_set = set(user_station['categories'])
+        database_set = set(station['categories'])
 
-                        s_dates = self._get_all_dates(station['time_from'], station['time_to'])
-                        u_dates = self._get_all_dates(user_station['time_from'], user_station['time_to'])
-                        if self._data_intersection(s_dates, u_dates):
-                            suitable_stations.append(station)
-
-        return suitable_stations
-
-    @staticmethod
-    def _data_intersection(user_data, database_data):
-        """
-        Return True if user_data has some elements in common
-        with database_data
-        :return: (bool)
-        """
-        if not isinstance(user_data, list):
-            user_data = [user_data]
-        if not isinstance(database_data, list):
-            database_data = [database_data]
-
-        user_set = set(user_data)
-        database_set = set(database_data)
-
-        if user_set.intersection(database_set) != set():
-            return True
-        else:
+        if user_set.intersection(database_set) == set():
+            return False
+        if station['type_id'] not in user_station['type_id']:
+            return False
+        if self.compare_dates(user_station['time_from'], station['time_to']) == 1:
+            return False
+        if self.compare_dates(user_station['time_to'], station['time_from']) == -1:
             return False
 
-    @staticmethod
-    def _get_all_dates(time_from, time_to):
+        for location in station['locations']:
+            if user_station['city_id'] == self._get_location(location)['city_id']:
+                return True
+        return False
+
+    def _get_location(self, location_id):
         """
-        Return list of all dates between time_from and time_to
-        :param time_from: (str) eg. "2020-02-01"
-        :param time_to: (str) eg. "2020-10-27"
-        :return: list = [datetime.date(int, int, int), ...]
+        Return info about location
+        :param location_id: int
+        :return: dict
         """
-        from datetime import date, timedelta
-        s_time_from = time_from.split('-')
-        s_time_to = time_to.split('-')
-
-        s_time_from = list(map(lambda x: int(x), s_time_from))
-        s_time_to = list(map(lambda x: int(x), s_time_to))
-
-        start_date_s = date(s_time_from[0], s_time_from[1], s_time_from[2])  # start date
-        end_date_s = date(s_time_to[0], s_time_to[1], s_time_to[2])  # end date
-
-        delta = end_date_s - start_date_s  # as timedelta
-
-        available_dates = []
-        for i in range(delta.days + 1):
-            day = start_date_s + timedelta(days=i)
-            available_dates.append(day)
-
-        return available_dates
+        return self.db.get('location/{}'.format(location_id), None)
