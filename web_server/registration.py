@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 
-import database.db_auth as db_auth
 from database.db import db
+import database.db_base as db_error
 
 
 registration_page = Blueprint('registration', __name__, template_folder='templates')
@@ -27,14 +27,14 @@ def registration():
                          'username': request.form.get("name")}
 
             try:
-                db.db_auth.add_new_user(user_dict)
+                db.db_users.add_new_user(user_dict)
                 return redirect(url_for("login.login"))
-            except db_auth.UserAlreadyExists:
+            except db_error.UserAlreadyExists:
                 error = 'user already exists'
                 return render_template('login.html', error=error)
 
         else:
             error = 'enter right email'
-            return render_template('login.html', error=error)
+            return render_template('registration.html', error=error)
 
     return render_template("registration.html", error=False)
