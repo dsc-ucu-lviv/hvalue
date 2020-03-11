@@ -24,6 +24,3 @@ def registration():
         return redirect(url_for('login.hello'))
 
     return render_template("registration.html", error=False)
-
-
-

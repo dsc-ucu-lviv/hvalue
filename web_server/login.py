@@ -23,4 +23,4 @@ def login():
 
 @login_page.route("/hello", methods=['GET'])
 def hello():
-    return render_template("hello.html")
+    return render_template("add_receive_station.html")

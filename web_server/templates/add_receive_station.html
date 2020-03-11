@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block main %}
+  <main>
+    <div class="testbox">
+    <form action="{{ url_for('receive-form.get_data') }}" method="POST">
+      <div class="banner">
+        <h1>Receive Station Form</h1>
+      </div>
+      <br/>
+      <fieldset>
+        <legend>Details</legend>
+          <div class="item">
+            <label for="address">Address<span>*</span></label>
+            <input id="address" type="text" name="address" />
+          </div>
+          <div class="item">
+            <label for="city">City<span>*</span></label>
+            <input id="city" type="text"   name="city" />
+          </div>
+          <div class="item" >
+              <details>
+                  <summary>
+                    <label>Categories<span>*</span></label>
+                  </summary>
+                  <ul>
+                      {# todo(issue_#23) - Add choose options for categories. #}
+                      <li>clothes</li>
+                      <li>food</li>
+                  </ul>
+              </details>
+          </div>
+      </fieldset>
+      <br/>
+      <fieldset>
+      <legend>Dates</legend>
+      <div class="columns">
+      <div class="item">
+      <label for="time_to">Check-in Date <span>*</span></label>
+      <input id="time_to" type="date" name="time_to" />
+      <i class="fas fa-calendar-alt"></i>
+      </div>
+      <div class="item">
+      <label for="time_out">Check-out Date <span>*</span></label>
+      <input id="time_out" type="date" name="time_out" />
+      <i class="fas fa-calendar-alt"></i>
+      </div>
+      <div class="item-description">
+          <label for="description">Short description</label>
+          <textarea id="description" name="description" rows="3"></textarea>
+      </div>
+      </fieldset>
+      <div class="btn-block">
+      <button type="submit" href="/">Submit</button>
+      </div>
+    </form>
+    </div>
+  </main>
+{% endblock %}
