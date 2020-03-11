@@ -74,3 +74,7 @@ class UserDoesNotExists(Exception):
 
 class WrongPassword(Exception):
     pass
+
+
+class EmailIsNotUnique(Exception):
+    pass

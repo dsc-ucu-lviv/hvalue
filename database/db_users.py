@@ -47,6 +47,7 @@ class DBAuth(DBBase):
         :return: user_id / Error
         - UserDoesNotExists
         """
+        # In case user does not exists, line below will raise error
         user_id = self._get_user_id_by_email(email)
 
         return self.check_user_password_by_id(user_id, password)
@@ -57,6 +58,7 @@ class DBAuth(DBBase):
         :return: True / False / Error
         - UserDoesNotExists
         """
+        # In case user does not exists, line below will raise error
         user_info = self._get_user_info(user_id)
 
         return self._hash_password(password) == user_info['password']
@@ -68,13 +70,15 @@ class DBAuth(DBBase):
                          'username': str,
                          'email': str,
                          'phone_number': str / None} / Error
-
-        IndexError - invalid input format
         UserDoesNotExists - invalid user_id
         """
-        # TODO: check if input data is correct
-        # Use function self._get_user_info and clean returned dict from 'password' field.
-        raise NotImplementedError
+        # In case user does not exists, line below will raise error
+        user_info = self._get_user_info(user_id)
+
+        return {'type_id': user_info['type_id'],
+                'username': user_info['username'],
+                'email': user_info['email'],
+                'phone_number': user_info['phone_number'] if 'phone_number' in user_info else None}
 
     def update_general_user_info(self, user_dict):
         """
@@ -86,8 +90,23 @@ class DBAuth(DBBase):
         IndexError - invalid input format
         UserDoesNotExists - invalid user_id
         """
-        # TODO: check if input data is correct
-        pass
+        if not {'user_id', 'username', 'email', 'phone_number'}.issubset(user_dict):
+            raise IndexError
+
+        # Check user existence
+        self.get_general_user_info(user_dict['user_id'])
+
+        # Check if provided email is unique
+        try:
+            some_user_id = self._get_user_id_by_email(user_dict['email'])
+            if some_user_id != user_dict['user_id']:
+                raise EmailIsNotUnique
+        except UserDoesNotExists:
+            pass
+
+        for key in ['username', 'email', 'phone_number']:
+            if key:
+                self.db.put('{}/{}'.format(self.t_users, user_dict['user_id']), key, user_dict[key])
 
     def update_user_password(self, user_id, new_password):
         """
