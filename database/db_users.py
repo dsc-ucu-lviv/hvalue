@@ -105,7 +105,7 @@ class DBAuth(DBBase):
             pass
 
         for key in ['username', 'email', 'phone_number']:
-            if key:
+            if user_dict[key]:
                 self.db.put('{}/{}'.format(self.t_users, user_dict['user_id']), key, user_dict[key])
 
     def update_user_password(self, user_id, new_password):
