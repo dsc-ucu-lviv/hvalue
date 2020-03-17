@@ -19,16 +19,14 @@
             <input id="city" type="text"   name="city" />
           </div>
           <div class="item" >
-              <details>
-                  <summary>
-                    <label>Categories<span>*</span></label>
-                  </summary>
-                  <ul>
-                      {# todo(issue_#23) - Add choose options for categories. #}
-                      <li>clothes</li>
-                      <li>food</li>
-                  </ul>
-              </details>
+            <label for="categories">Categories<span>*</span></label>
+
+          <div id="categories">
+            <input type="checkbox" name="favorite_pet1" value="Cats">Cats<br>
+            <input type="checkbox" name="favorite_pet2" value="Dogs">Dogs<br>
+            <input type="checkbox" name="favorite_pet3" value="Birds">Birds<br>
+          </div>
+
           </div>
       </fieldset>
       <br/>

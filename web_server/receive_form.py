@@ -11,14 +11,17 @@ def get_data():
                     and request.form.get("time_out") and request.form.get("description"):
                 items = ["address", "city", "time_to", "time_out", "description"]
                 # input_data = {"1": [request.form.get(item) for item in items]}
-                categories = request.args.get('type')
                 input_data = {'user_id': 123456,
-                                'type_id': 123456,
-                                'categories': [categories],
-                                'locations': [request.form.get('city'), request.form.get('address')],
-                                'time_from': request.form.get('time_in'),
-                                'time_to': request.form.get('time_out'),
-                                'description': request.form.get('description')}
+                              'type_id': 123456,
+                              'categories': [],
+                              'locations': [request.form.get('city'), request.form.get('address')],
+                              'time_from': request.form.get('time_to'),
+                              'time_to': request.form.get('time_out'),
+                              'description': request.form.get('description')}
+                categories = [request.form.get("favorite_pet1"), request.form.get("favorite_pet2"), request.form.get("favorite_pet3")]
+                for category in categories:
+                    if category is not None:
+                        input_data['categories'].append(category)
                 print(input_data)
             else:
                 error = 'enter password'
