@@ -5,13 +5,6 @@ class DBMap(DBBase):
     def __init__(self, database):
         super().__init__(database)
 
-    def get_cities(self):
-        """
-        Return all available cities in database.
-        :return: (dict) {city_id: "city_name", ...}
-        """
-        return self.db.get('cities', None)
-
     def get_categories(self):
         """
         Return all available categories in database.
