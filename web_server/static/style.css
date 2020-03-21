@@ -17,3 +17,9 @@ main {
     text-align: center;
     flex-direction: column;
 }
+
+#categories input[type="checkbox"] {
+    display: inline;
+    width: auto;
+    margin-right: 10px;
+}

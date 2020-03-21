@@ -2,55 +2,91 @@
 
 {% block main %}
   <main>
-    <div class="testbox">
+    <div class="form-box">
     <form action="{{ url_for('receive-form.get_data') }}" method="POST">
       <div class="banner">
-        <h1>Receive Station Form</h1>
+        <h1>New Receive Station</h1>
       </div>
       <br/>
-      <fieldset>
-        <legend>Details</legend>
-          <div class="item">
-            <label for="address">Address<span>*</span></label>
-            <input id="address" type="text" name="address" />
-          </div>
-          <div class="item">
-            <label for="city">City<span>*</span></label>
-            <input id="city" type="text"   name="city" />
-          </div>
-          <div class="item" >
-            <label for="categories">Categories<span>*</span></label>
+        <div class="items">
 
-          <div id="categories">
-            <input type="checkbox" name="favorite_pet1" value="Cats">Cats<br>
-            <input type="checkbox" name="favorite_pet2" value="Dogs">Dogs<br>
-            <input type="checkbox" name="favorite_pet3" value="Birds">Birds<br>
-          </div>
+          <div class="row">
+
+            <div class="column">
+              <label for="name" class="text-box">Name<span>*</span></label>
+              <input id="name" type="text" name="name"/>
+            </div>
+
+            <div class="column">
+              <label for="type-org" class="text-box">Type of organization<span>*</span></label>
+              <select id="type-org" name="type-org">
+                <option value="shelter">Shelter</option>
+                <option value="orphanage">Orphanage</option>
+                <option value="homeless-shelter">Homeless shelter</option>
+              </select>
+            </div>
 
           </div>
-      </fieldset>
+
+          <div class="row">
+
+            <div class="column">
+              <label for="city" class="text-box">City<span>*</span></label>
+              <select id="city" name="city">
+                <option value="Lviv">Lviv</option>
+                <option value="Kyiv">Kyiv</option>
+                <option value="Kharkiv">Kharkiv</option>
+              </select>
+            </div>
+
+            <div class="column">
+              <label for="address" class="text-box">Address<span>*</span></label>
+              <input id="address" type="text" name="address" />
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="column">
+              <div class="checkboxes">
+                <label for="categories">Categories<span>*</span></label>
+                <div id="categories">
+                  <input type="checkbox" name="category1" value="Food">Food<br>
+                  <input type="checkbox" name="category2" value="Clothes">Clothes<br>
+                </div>
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="calender">
+                <label for="time_to">Check-in Date</label>
+                <input id="time_to" type="date" name="time_to"/>
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+
+              <div class="calender">
+                <label for="time_out">Check-out Date</label>
+                <input id="time_out" type="date" name="time_out"/>
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+            </div>
+
+          </div>
+
+          <div class='double-column'>
+            <div class="item-description">
+              <label for="description" class="text-box-description">Short description <span>*</span></label>
+              <textarea id="description" type="text-description" name="description" rows="2"></textarea>
+            </div>
+          </div>
+
+          <div class="submit-block">
+            <button type="submit" href="/"><b>Add new station</b></button>
+          </div>
+
+        </div>
       <br/>
-      <fieldset>
-      <legend>Dates</legend>
-      <div class="columns">
-      <div class="item">
-      <label for="time_to">Check-in Date <span>*</span></label>
-      <input id="time_to" type="date" name="time_to" />
-      <i class="fas fa-calendar-alt"></i>
-      </div>
-      <div class="item">
-      <label for="time_out">Check-out Date <span>*</span></label>
-      <input id="time_out" type="date" name="time_out" />
-      <i class="fas fa-calendar-alt"></i>
-      </div>
-      <div class="item-description">
-          <label for="description">Short description</label>
-          <textarea id="description" name="description" rows="3"></textarea>
-      </div>
-      </fieldset>
-      <div class="btn-block">
-      <button type="submit" href="/">Submit</button>
-      </div>
     </form>
     </div>
   </main>

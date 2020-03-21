@@ -18,7 +18,7 @@ def get_data():
                               'time_from': request.form.get('time_to'),
                               'time_to': request.form.get('time_out'),
                               'description': request.form.get('description')}
-                categories = [request.form.get("favorite_pet1"), request.form.get("favorite_pet2"), request.form.get("favorite_pet3")]
+                categories = [request.form.get("category1"), request.form.get("category2")]
                 for category in categories:
                     if category is not None:
                         input_data['categories'].append(category)
