@@ -15,17 +15,24 @@ h1 {
     line-height: 83px;
 }
 
-input, select{
-    font-size: 105%;
-}
 
 label{
     font-size: 115%;
 }
 
+label[for=city], label[for=name]{
+    text-align: left;
+}
+
+label[for=address], label[for=type-org]{
+    text-align: right;
+}
+
 input[type=text], select {
     width: 100%;
+    height: 40px;
     padding: 12px 20px;
+    font-size: 110%;
     margin: 8px 0;
     display: inline-block;
     border: 1px var(--light-powder);
@@ -90,6 +97,7 @@ div.submit-block>button {
 .column {
     display: flex;
     flex-direction: column;
+    font-size: 90%;
     padding: 2%;
     margin: 0px 0px -22px 0px;
     flex-basis: 100%;
