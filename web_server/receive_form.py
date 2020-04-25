@@ -23,6 +23,7 @@ def get_data():
                     if category is not None:
                         input_data['categories'].append(category)
                 print(input_data)
+                return input_data
             else:
                 error = 'enter password'
                 return render_template('add_receive_form.html', error=error)
