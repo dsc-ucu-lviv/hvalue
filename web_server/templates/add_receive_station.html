@@ -53,16 +53,15 @@
           </div>
 
           <div class="row">
-
             <div class="column">
               <div class="checkboxes">
                 <label for="categories">Categories<span>*</span></label>
                 <div id="categories">
-                  <select data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="test">
-                    <option name="category1" value="Food">Food</option>
-                    <option name="category2" value="Clothes">Clothes</option>
+                  <select name="categories" multiple class="chosen-select">
+                    <option value=""></option>
+                    <option value="Food">Food</option>
+                    <option value="Clothes">Clothes</option>
                   </select>
-                  <input type="submit">
                 </div>
               </div>
             </div>
@@ -97,10 +96,15 @@
         </div>
       <br/>
     </form>
+    {% if error %}
+    <label class=error><strong>Error:</strong> {{ error }}</label>
+    {% endif %}
     </div>
   </main>
+<script>
+  $(".chosen-select").chosen({
+    no_results_text: "Oops, nothing found!"
+  })
+</script >
 {% endblock %}
 
-$(".chosen-select").chosen({
-no_results_text: "Oops, nothing found!"
-})
