@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 
-from web_server.login import users
+from database.db import db
+import database.db_base as db_error
 
 
 registration_page = Blueprint('registration', __name__, template_folder='templates')
-parameters = ["name", "email", "phone number", "password"]
+parameters = ["name", "email", "password1", "password2"]
 
 
 @registration_page.route("/", methods=["GET", "POST"])
@@ -16,11 +17,23 @@ def registration():
                 error = 'enter {}'.format(parameter)
                 return render_template('registration.html', error=error)
 
-            if parameter == "name":
-                users[request.form.get("name")] = {}
-            elif parameter != "name":
-                users[request.form.get("name")][parameter] = request.form.get(parameter)
-        print(users)
-        return redirect(url_for('login.hello'))
+        if request.form.get("password1") != request.form.get("password2"):
+            error = 'passwords do not match'
+            return render_template('registration.html', error=error)
+          
+        if ('@' and '.') in request.form.get("email"):
+            user_dict = {'email': request.form.get("email"),
+                         'password': request.form.get("password1"),
+                         'username': request.form.get("name")}
 
+            try:
+                db.db_users.add_new_user(user_dict)
+                return redirect(url_for("login.login"))
+            except db_error.UserAlreadyExists:
+                error = 'user already exists'
+                return render_template('login.html', error=error)
+
+        else:
+            error = 'enter right email'
+            return render_template('registration.html', error=error)
     return render_template("registration.html", error=False)

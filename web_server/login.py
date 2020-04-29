@@ -1,18 +1,24 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 
-login_page = Blueprint('login', __name__, template_folder='templates')
+from database.db import db
+import database.db_base as db_error
 
-users = {'sdv': {'email': 'sdv', 'phone number': 'sdv', 'password': 'sdv'}}
+login_page = Blueprint('login', __name__, template_folder='templates')
 
 
 @login_page.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        if request.form.get("name") in users:
-            if request.form.get("password") == users[request.form.get("name")]["password"]:
-                return redirect(url_for('login.hello'))
-            else:
-                error = 'enter password'
+        if request.form.get("email"):
+            try:
+                if db.db_users.check_user_password_by_email(request.form.get("email"),
+                                                            request.form.get("password")):
+                    return redirect(url_for('login.hello'))
+                else:
+                    error = 'enter right password'
+                    return render_template('login.html', error=error)
+            except db_error.UserDoesNotExists:
+                error = 'user does not exist'
                 return render_template('login.html', error=error)
         else:
             error = 'enter right username'
