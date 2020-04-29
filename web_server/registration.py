@@ -20,7 +20,7 @@ def registration():
         if request.form.get("password1") != request.form.get("password2"):
             error = 'passwords do not match'
             return render_template('registration.html', error=error)
-
+          
         if ('@' and '.') in request.form.get("email"):
             user_dict = {'email': request.form.get("email"),
                          'password': request.form.get("password1"),
@@ -36,5 +36,4 @@ def registration():
         else:
             error = 'enter right email'
             return render_template('registration.html', error=error)
-
     return render_template("registration.html", error=False)

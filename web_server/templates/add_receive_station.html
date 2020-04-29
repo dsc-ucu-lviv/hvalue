@@ -1,0 +1,110 @@
+
+{% extends "base.html" %}
+
+{% block main %}
+  <main>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='color_definitions.css') }}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+
+    <div class="form-box">
+    <form action="{{ url_for('receive-form.get_data') }}" method="POST">
+      <div class="banner">
+        <h1>New Receive Station</h1>
+      </div>
+      <br/>
+        <div class="items">
+
+          <div class="row">
+
+            <div class="column">
+              <label for="name" class="text-box">Name<span>*</span></label>
+              <input id="name" type="text" name="name"/>
+            </div>
+
+            <div class="column">
+              <label for="type-org" class="text-box">Type of organization<span>*</span></label>
+              <select id="type-org" name="type-org">
+                <option value="shelter">Shelter</option>
+                <option value="orphanage">Orphanage</option>
+                <option value="homeless-shelter">Homeless shelter</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="column">
+              <label for="city" class="text-box">City<span>*</span></label>
+              <select id="city" name="city">
+                <option value="Lviv">Lviv</option>
+                <option value="Kyiv">Kyiv</option>
+                <option value="Kharkiv">Kharkiv</option>
+              </select>
+            </div>
+
+            <div class="column">
+              <label for="address" class="text-box">Address<span>*</span></label>
+              <input id="address" type="text" name="address" />
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="column">
+              <div class="checkboxes">
+                <label for="categories">Categories<span>*</span></label>
+                <div id="categories">
+                  <select name="categories" multiple class="chosen-select">
+                    <option value=""></option>
+                    <option value="Food">Food</option>
+                    <option value="Clothes">Clothes</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="calender">
+                <label for="time_to">Check-in Date</label>
+                <input id="time_to" type="date" name="time_to"/>
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+
+              <div class="calender">
+                <label for="time_out">Check-out Date</label>
+                <input id="time_out" type="date" name="time_out"/>
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+            </div>
+
+          </div>
+
+          <div class='double-column'>
+            <div class="item-description">
+              <label for="description" class="text-box-description">Short description <span>*</span></label>
+              <textarea id="description" type="text-description" name="description" rows="2"></textarea>
+            </div>
+          </div>
+
+          <div class="submit-block">
+            <button type="submit" href="/"><b>Add new station</b></button>
+          </div>
+
+        </div>
+      <br/>
+    </form>
+    {% if error %}
+    <label class=error><strong>Error:</strong> {{ error }}</label>
+    {% endif %}
+    </div>
+  </main>
+<script>
+  $(".chosen-select").chosen({
+    no_results_text: "Oops, nothing found!"
+  })
+</script >
+{% endblock %}
+

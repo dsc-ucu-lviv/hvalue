@@ -1,0 +1,118 @@
+.form-box {
+    position: relative;
+    left: 30%;
+    height: 40%;
+    width: 65%;
+    margin: 20px;
+    border-radius: 75px;
+    background-color: ghostwhite;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin: 0;
+    font-size: 50px;
+    z-index: 2;
+    line-height: 83px;
+}
+
+
+label{
+    font-size: 115%;
+}
+
+label[for=city], label[for=name]{
+    text-align: left;
+}
+
+label[for=address], label[for=type-org]{
+    text-align: right;
+}
+
+input[type=text], select {
+    width: 100%;
+    height: 40px;
+    padding-left: 12px;
+    font-size: 110%;
+    margin: 8px 0;
+    display: flex;
+    border: 1px var(--light-powder);
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+textarea[type=text-description] {
+    width: 100%;
+    height: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px var(--light-powder);
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+div.calender > input {
+    border-radius: 10px;
+    border-color: transparent;
+}
+
+input[type=date]{
+    margin: 2%;
+}
+
+input[type=checkbox]{
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+}
+
+label.text-box{
+    float: left;
+}
+
+label.text-box-description {
+    float: left;
+}
+
+div.submit-block>button {
+    background-color: var(--dark-violet);
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 30px 2px 0px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    font-size: 90%;
+    padding: 2%;
+    margin: 0px 0px -22px 0px;
+    flex-basis: 100%;
+    flex: 1
+}
+
+.double-column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 2
+}
+
+div.checkboxes {
+    text-align: left;
+}
