@@ -8,7 +8,7 @@ registration_page = Blueprint('registration', __name__, template_folder='templat
 parameters = ["name", "email", "password1", "password2"]
 
 
-@registration_page.route("/", methods=["GET", "POST"])
+@registration_page.route("/registration", methods=["GET", "POST"])
 def registration():
     if request.method == "POST":
 

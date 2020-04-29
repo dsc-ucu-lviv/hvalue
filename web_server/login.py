@@ -6,7 +6,7 @@ import database.db_base as db_error
 login_page = Blueprint('login', __name__, template_folder='templates')
 
 
-@login_page.route("/login", methods=["GET", "POST"])
+@login_page.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         if request.form.get("email"):

@@ -1,21 +1,59 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='color_definitions.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style_for_sign_in_up.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=EB+Garamond" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>Hvalue</title>
+</head>
 
-{% block main %}
-    <main class="login_centred_box">
-        <h1> Log in:</h1>
+<body>
+<div class="content">
 
-        <form action="{{ url_for('login.login') }}" method="POST">
-            <input name="email"
-                   type="text"
-                   placeholder="user email"
-                   aria-label="user email"
-                   autocomplete="off"/>
-            <input name="password"  type="password" placeholder="password"  aria-label="password" />
-            <button type="submit" aria-label="Next"> Log in </button>
-        </form>
-        <a href = "{{ url_for('registration.registration') }}">Sign up</a>
-        {% if error %}
-        <label class=error><strong>Error:</strong> {{ error }}</label>
-        {% endif %}
+    <main class="main">
+        <!-- todo(issue_#24) - Add link to the overview page. #-->
+        <a href="#">
+            <img class="logo"
+                 src="https://firebasestorage.googleapis.com/v0/b/hvalue-310c1.appspot.com/o/mockups%2Flogo2.png?alt=media&token=4fa7a778-94e5-40c1-b9b9-1b8d8178c7bf"
+                 alt="logo"
+                 aria-label="logo of H-Value organization"> </a>
+
+        <div class="sign_in_up">
+
+            <h1> Sign in</h1>
+
+            <form class="sign_in_up-form" action="{{ url_for('login.login') }}" method="POST">
+                <input class="form_item" name="email"
+                       type="text"
+                       placeholder="user email"
+                       aria-label="user email"
+                       autocomplete="off"/>
+                <input class="form_item" name="password"  type="password" placeholder="password"  aria-label="password" />
+
+                {% if error %}
+                <label class="error form_item"><strong>Error:</strong> {{ error }}</label>
+                {% endif %}
+
+                <button class="form_item" type="submit" aria-label="Next"> Sign in </button>
+            </form>
+
+            <div class="sign_up_in-link sign_up-link">
+                Don't have an account?
+                <a href = "{{ url_for('registration.registration') }}">Sign up</a>
+            </div>
+        </div>
     </main>
-{% endblock %}
+
+    <img class="main_image"
+         src="https://firebasestorage.googleapis.com/v0/b/hvalue-310c1.appspot.com/o/mockups%2Fcorgi.jpg?alt=media&token=54c9b75b-74f5-45c3-b108-02ec89101bd7"
+         alt="corgi"
+         aria-label="photo of two corgies">
+
+</div>
+
+</body>
+</html>

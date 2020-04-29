@@ -6,7 +6,6 @@ from web_server.receive_form import receive_form_page
 from web_server.map import map_page
 
 
-
 app = Flask(__name__)
 app.register_blueprint(registration_page)
 app.register_blueprint(login_page)
