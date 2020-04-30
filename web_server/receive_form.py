@@ -17,7 +17,7 @@ def get_data():
                               'time_from': request.form.get('time_to'),
                               'time_to': request.form.get('time_out'),
                               'description': request.form.get('description')}
-                # print(input_data)
+                print(input_data)
                 # return input_data
             else:
                 error = 'enter all information'

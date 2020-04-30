@@ -19,22 +19,26 @@ class DBMap(DBBase):
         """
         return self.db.get('receive_station_types', None)
 
+    def get_organization_types(self):
+        # TODO: implement
+        return NotImplementedError
+
     def get_receive_stations(self, rcv_station_dict):
         """
         Return all available receiver_station in database that match requirements.
         rcv_station_dict = {'city_id': int,
                             'time_from': str,
-                            'type_id': list(int),
                             'time_to': str,
+                            'type_id': list(int),
+                            'organizations': list(user_id),
                             'categories': list(categories_id)}
         :return: (dict) {receiver_station_type_id: {user_id: int,
                                                     type_id: int,
-                                                    locations: list(int),
+                                                    categories: list(int),
                                                     time_from: str,
                                                     time_to: str,
-                                                    description: str,
-                                                    categories: list(int),
-                                                    items: list(int)}, ...}
+                                                    locations: list(int),
+                                                    description: str}
         """
         response = self.db.get("receive_stations", None)
         return list(filter(lambda x: self.checking(rcv_station_dict, x), response))
@@ -50,9 +54,12 @@ class DBMap(DBBase):
         user_set = set(user_station['categories'])
         database_set = set(station['categories'])
 
-        if user_set.intersection(database_set) == set():
+        if user_set and (user_set.intersection(database_set) == set()):
             return False
-        if station['type_id'] not in user_station['type_id']:
+        if user_station['type_id'] and (station['type_id'] not in user_station['type_id']):
+            return False
+        if user_station['organisations'] and (self._get_organization_type(station['user_id'])
+                                              not in user_station['organisations']):
             return False
         if self.compare_dates(user_station['time_from'], station['time_to']) == 1:
             return False
@@ -70,4 +77,7 @@ class DBMap(DBBase):
         :param location_id: int
         :return: dict
         """
-        return self.db.get('location/{}'.format(location_id), None)
+        return self.db.get('locations/{}'.format(location_id), None)
+
+    def _get_organization_type(self, user_id):
+        return self.db.get('users/{}/type_id'.format(user_id), None)
