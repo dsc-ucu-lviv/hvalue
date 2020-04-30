@@ -11,8 +11,8 @@
              width="80%"
              height="35%"
              aria-label="photo of two corgies">
-        <h2>{{org_name}}</h2>
-        <h3>{{org_type}}</h3>
+        <h2>{{org.org_name}}</h2>
+        <h4>{{org.org_type}}</h4>
         <p> <span class="title">Receive stations</span> <span> {{org.num_stations}}</span></p>
         {% if org and org.phone_number %}
             <p> <span class="title">Phone number</span> <span>{{org.phone_number}}</span></p>

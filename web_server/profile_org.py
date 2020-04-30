@@ -25,6 +25,7 @@ def profile_org():
                        'email': database.db.profile_info.get('email'),
                        'phone_number': database.db.profile_info.get('phone_number'),
                        'num_stations': len(org_stations) if org_stations else 0}
+
         return render_template("profile_org.html", org=org_profile, stations=org_stations,
                                profile_info=database.db.profile_info)
 
