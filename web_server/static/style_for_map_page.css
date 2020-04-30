@@ -46,3 +46,7 @@ aside
     border-color: var(--light-powder);
 }
 
+.checkbox{
+    margin-right: 10px;
+}
+

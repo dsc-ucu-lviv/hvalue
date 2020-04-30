@@ -25,4 +25,4 @@ def get_data():
             error = 'enter all information'
             return render_template('add_receive_station.html', error=error)
 
-    return render_template("login.html")
+    return render_template("add_receive_station.html")
