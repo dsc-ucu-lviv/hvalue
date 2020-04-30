@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block main %}
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <main class="new_task_box">
+        <form action="{{ url_for('profile_org.profile_org') }}" method="POST">
+            <div class="profile_card">
+                <img class="profile_image"
+                     src="https://firebasestorage.googleapis.com/v0/b/hvalue-310c1.appspot.com/o/mockups%2Fcorgi.jpg?alt=media&token=54c9b75b-74f5-45c3-b108-02ec89101bd7"
+                     alt="corgi"
+                     width="80%"
+                     height="35%"
+                     aria-label="photo of two corgies">
+                <h2>{{org_name}}</h2>
+                <h3>{{org_type}}</h3>
+                <p> <span class="title">Receive stations</span> <span> {{num_stations}}</span></p>
+                <p> <span class="title">Phone number</span> <span>{{phone_number}}</span></p>
+                <p> <span class="title">E-mail</span> <span>{{email}}</span></p>
+            </div>
+            <button class="add_button">+</button>
+
+            <div class="point_card">
+                <h2>Prytuloc</h2>
+                <p class="point_text">{{name_stations[0]}}</p>
+                <p class="point_text"><i class='fas fa-map-marker-alt'></i>{{addresses[0]}}</p>
+                <p class="point_text">{{', '.join(categories)}}</p>
+            </div>
+        </form>
+    </main>
+{% endblock %}

@@ -7,6 +7,14 @@ class DBStation(DBBase):
 
         self.t_new_rcv_stations = '/new_receive_stations'
 
+    def get_profile_info(self, user_id):
+        """
+        :param user_id:
+        :return: (dict) {'username': str, 'phone_number': str / None, 'email': str,
+        'stations': [{'name': str, 'address': str, 'categories': ['food' ... ]}]}
+        """
+        pass
+
     def add_new_rcv_station(self, station_dict):
         """
         Send new station for review.

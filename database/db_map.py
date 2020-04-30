@@ -23,6 +23,25 @@ class DBMap(DBBase):
         # TODO: implement
         return NotImplementedError
 
+    def get_easy_rcv_station(self, rcv_station_dict):
+        """
+        Return all available receiver_station in database that match requirements.
+        rcv_station_dict = {'city': Lviv,
+                            'time_from': 01-01-2018,
+                            'time_to': 01-12-2050,
+                            'type_id': ['container', 'organisation'],
+                            'organizations': ['orphanage', 'shelter', 'charitable', 'others'],
+                            'categories': ['money', 'clothes', 'food']}
+        :return: (dict) {receiver_station_type_id: {username: str,
+                                                    type: ['container', 'organisation'],
+                                                    categories: ['money', 'clothes', 'food'],
+                                                    time_from: str,
+                                                    time_to: str,
+                                                    locations: [(lat, lon)],
+                                                    description: str}
+        """
+        pass
+
     def get_receive_stations(self, rcv_station_dict):
         """
         Return all available receiver_station in database that match requirements.

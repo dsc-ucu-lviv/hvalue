@@ -22,3 +22,4 @@ class Database:
 db = Database()
 
 profile_info = None
+# {'user_id', 'username', 'email', ('phone_number'), ('type_id')}
