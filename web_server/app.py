@@ -17,7 +17,7 @@ app.register_blueprint(profile_org_page)
 
 @app.route("/")
 def render_main_page():
-    return redirect(url_for('map.map'))
+    return redirect(url_for('receive-form.get_data'))
 
 
 if __name__ == '__main__':
