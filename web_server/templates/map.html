@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Display a map</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <link rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='style_for_map.css') }}"/>
-</head>
-<body>
+{% extends "map_page.html" %}
+
+{% block map %}
+
     <div id="map"></div>
     <script type="text/javascript">
         function initMap() {
@@ -36,14 +29,14 @@
                   '<div id="siteNotice">'+
                   '</div>'+
                   '<div id="bodyContent">'+
-                  `<p><b>Організація: </b> ${station.organization_name} </p>` +
-                  `<p><b>Потребують: </b> ${station.needs} </p>` +
+                  `<p><b>Organization: </b> ${station.organization_name} </p>` +
+                  `<p><b>Needs: </b> ${station.needs} </p>` +
                     '<style>' +
                         '.text {' +
                         'text-align:  right;}' +
                     '</style>' +
                   `<p class="text-align"><a href='${station.url}'>`+
-                  'Сторінка організації</a></p>'+
+                  'Organization website</a></p>'+
                   '</div>'+
                   '</div>'
                 })
@@ -61,5 +54,5 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU2-WIyN8CLq6TFDNw2IIMrAkWYI05gFk&callback=initMap">
         </script>
-</body>
-</html>
+
+{% endblock %}

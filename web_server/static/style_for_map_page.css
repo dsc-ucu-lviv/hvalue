@@ -1,0 +1,61 @@
+aside 
+{
+    float: left;
+    width: 27%;
+    color: var(--light-powder);
+
+    font-family: 'Times New Roman', Times, serif;
+    background: var(--dark-violet);
+}
+
+.section{
+    border-bottom: 1px solid var(--light-powder);
+    padding: 10px;
+}
+
+.map_page-content{
+    margin: 20px 50px 20px 0;
+    display: flex;
+}
+
+.section_item{
+    display: flex;
+    margin-left: 20px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.map_page-form{
+    margin-left: 50px;
+}
+
+.city_input{
+    margin: 15px;
+}
+
+.section_title{
+    margin-top: 5px;
+}
+
+.map_page-form_button{
+    background-color: var(--light-powder);
+    border-radius: 10px;
+    margin: 20px;
+    padding: 5px;
+    width: 100px;
+    font-size: 1.2em;
+    border-color: var(--light-powder);
+}
+
+.checkbox{
+    margin-right: 10px;
+}
+
+div#map {
+    position: absolute;
+    left: 28%;
+    right: 3%;
+    height: 85vh;
+    width: calc(100% - 28% - 2%);
+    overflow: auto;
+}

@@ -34,9 +34,11 @@ header > .profile_info > .profile_info__name {
 }
 
 div.profile_info > details > nav {
-    background-color: var(--light-violet);
+    background-color: white;
+    border: solid 1px var(--light-violet);
     position: absolute;
-    width: 10rem;
+    width: 12rem;
+    z-index: 5;
     margin-left: -7rem;
 }
 
@@ -48,7 +50,7 @@ details > nav > ul {
 
 details > nav > ul > li {
     padding: 0.5rem;
-    text-align: center;
+    border-bottom: solid 1px var(--light-violet);
 }
 
 summary {
@@ -74,4 +76,12 @@ header > .profile_info > details > summary > .profile_info__icon {
 details > nav > ul > li > a {
     color: var(--dark-violet);
     text-decoration: none;
+}
+
+.text-link{
+    color: var(--light-powder);
+}
+
+.profile_info{
+    margin-right: 70px;
 }

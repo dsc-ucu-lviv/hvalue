@@ -4,8 +4,9 @@ from database.db_base import *
 
 
 class DBAuth(DBBase):
-    def __init__(self, database):
+    def __init__(self, database, parent):
         super().__init__(database)
+        self.parent = parent
 
         self.t_users = '/users'
         self.t_user_types = '/user_types'
@@ -16,7 +17,8 @@ class DBAuth(DBBase):
         Create new user in database.
         user_dict = {'email': str,
                      'password': str,
-                     'username': str}
+                     'username': str,
+                     'type_id': int}
         :return: user_id / Error
         - IndexError
         - UserAlreadyExists
@@ -30,11 +32,13 @@ class DBAuth(DBBase):
         except UserDoesNotExists:
             pass
 
+        print(user_dict)
+
         # In case there are other irrelevant keys in user_dict -> creating new dict
         new_user_dict = {'email': user_dict['email'],
                          'password': self._hash_password(user_dict['password']),
                          'username': user_dict['username'],
-                         'type_id': 0}
+                         'type_id': user_dict['type_id']}
 
         self.increase_last_id('user_id')
         self.db.put(self.t_users, self.get_last_id('user_id'), new_user_dict)
@@ -44,13 +48,15 @@ class DBAuth(DBBase):
         Check if user password is correct.
         user_dict = {'email': str,
                      'password': str}
-        :return: user_id / Error
+        :return: user_id / False / Error
         - UserDoesNotExists
         """
         # In case user does not exists, line below will raise error
         user_id = self._get_user_id_by_email(email)
 
-        return self.check_user_password_by_id(user_id, password)
+        if self.check_user_password_by_id(user_id, password):
+            return user_id
+        return False
 
     def check_user_password_by_id(self, user_id, password):
         """
@@ -128,6 +134,7 @@ class DBAuth(DBBase):
                          'username': str,
                          'email': str,
                          'password': str,
+                         'type_id': int,
                          ? 'phone_number': str} / Error
         - UserDoesNotExists
         """

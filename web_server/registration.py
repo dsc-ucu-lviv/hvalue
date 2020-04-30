@@ -8,7 +8,7 @@ registration_page = Blueprint('registration', __name__, template_folder='templat
 parameters = ["name", "email", "password1", "password2"]
 
 
-@registration_page.route("/", methods=["GET", "POST"])
+@registration_page.route("/registration", methods=["GET", "POST"])
 def registration():
     if request.method == "POST":
 
@@ -24,7 +24,8 @@ def registration():
         if ('@' and '.') in request.form.get("email"):
             user_dict = {'email': request.form.get("email"),
                          'password': request.form.get("password1"),
-                         'username': request.form.get("name")}
+                         'username': request.form.get("name"),
+                         'type_id': request.form.get("organization")}
 
             try:
                 db.db_users.add_new_user(user_dict)

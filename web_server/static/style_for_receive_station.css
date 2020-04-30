@@ -1,6 +1,6 @@
 .form-box {
     position: relative;
-    left: 30%;
+    left: 15%;
     height: 40%;
     width: 65%;
     margin: 20px;
@@ -62,10 +62,10 @@ input[type=date]{
     margin: 2%;
 }
 
-input[type=checkbox]{
-    width: 100%;
-    margin: 10px 0px 10px 0px;
-}
+/*input[type=checkbox]{*/
+    /*width: 100%;*/
+    /*margin: 10px 0px 10px 0px;*/
+/*}*/
 
 label.text-box{
     float: left;
@@ -115,4 +115,8 @@ div.submit-block>button {
 
 div.checkboxes {
     text-align: left;
+}
+
+.item-description{
+    margin: 20px;
 }
