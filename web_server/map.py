@@ -8,14 +8,6 @@ map_page = Blueprint('map', __name__, template_folder='templates')
 
 @map_page.route("/map", methods=["GET", "POST"])
 def map():
-    # 'city': Lviv,
-    # 'time_from': 01 - 01 - 2018,
-    # 'time_to': 01 - 12 - 2050,
-    # 'type_id': ['container', 'organisation'],
-    # 'organizations': ['orphanage', 'shelter', 'charitable', 'others'],
-    # 'categories': ['money', 'clothes', 'food']}
-
-    print("receiver_type_0", request.form)
     if request.method == "POST":
         matched_stations = db.db_map.get_easy_rcv_station({
             'city': request.form.get("city_input"),
