@@ -62,10 +62,10 @@ input[type=date]{
     margin: 2%;
 }
 
-input[type=checkbox]{
-    width: 100%;
-    margin: 10px 0px 10px 0px;
-}
+/*input[type=checkbox]{*/
+    /*width: 100%;*/
+    /*margin: 10px 0px 10px 0px;*/
+/*}*/
 
 label.text-box{
     float: left;

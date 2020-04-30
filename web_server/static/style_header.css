@@ -75,3 +75,11 @@ details > nav > ul > li > a {
     color: var(--dark-violet);
     text-decoration: none;
 }
+
+.text-link{
+    color: var(--light-powder);
+}
+
+.profile_info{
+    margin-right: 70px;
+}

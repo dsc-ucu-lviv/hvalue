@@ -15,7 +15,7 @@ app.register_blueprint(map_page)
 
 @app.route("/")
 def render_main_page():
-    return redirect(url_for('login'))
+    return redirect(url_for('map.map'))
 
 
 if __name__ == '__main__':
