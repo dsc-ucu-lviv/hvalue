@@ -1,27 +1,37 @@
-.profile_card {
-    left: 0%;
-    position: absolute;
+main.profile_page {
+    margin: 0;
+    display: inherit;
+    width: 100%;
+    flex-flow: row;
+}
+
+aside.profile_card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
-    margin: auto;
     text-align: center;
     height: 100%;
     width: 30%;
     color: black    ;
+    background-color: white;
 }
 
 .point_card {
-    left: 30%;
-    top: 30%;
-    position: absolute;
-    border-radius: 25%;
+    border-radius: 2rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    margin: auto;
+    min-width: 20%;
     text-align: center;
-    height: 30%;
-    width: 20%;
+    padding: 0 2rem;
     color: black;
+}
+
+div.stations_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+div.stations_list > .point_card {
+    margin: 2rem;
 }
 
 .title {
@@ -34,18 +44,17 @@
     color: grey;
     font-size: 17px;
     text-align: center;
+    min-width: 8rem;
 }
 
 span{
     text-align: right;
 }
 
-.add_button {
-    left: 60%;
-    top: 15%;
-    position: absolute;
+button.add_button {
     display: inline-block;
     padding: 15px 25px;
+    margin: 3%;
     font-size: 40px;
     cursor: pointer;
     text-align: center;
