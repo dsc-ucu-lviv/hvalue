@@ -12,12 +12,13 @@ def map():
         matched_stations = db.db_map.get_easy_rcv_station({
             'city': request.form.get("city_input"),
             'station_type': request.form.getlist("station_type"),
-            'time_from': "01-01-2018",
-            'time_to': "01-01-2021",
+            'time_from': "2018-01-01",
+            'time_to': "2050-01-01",
             'organizations': request.form.getlist("organization"),
             'categories': request.form.getlist("donation")
         })
 
+        # print('matched_stations', matched_stations)
         return render_template("map.html", coords=matched_stations,
                                city_center_coords={"lat": 49.8397, "lng": 24.0297},
                                profile_info=database.db.profile_info)

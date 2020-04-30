@@ -55,25 +55,34 @@ class DBMap(DBBase):
                     'time_from': rcv_station_dict['time_from'],
                     'time_to': rcv_station_dict['time_to'],
                     'type_id': [rcv_station_types[type] for type in rcv_station_dict['station_type']],
-                    'organisations': [rcv_station_types[type] for type in rcv_station_dict['organisations']],
-                    'categories': [rcv_station_types[type] for type in rcv_station_dict['categories']]}
+                    'organisations': [organisation_types[type] for type in rcv_station_dict['organizations']],
+                    'categories': [category_types[type] for type in rcv_station_dict['categories']]}
         response = self.get_receive_stations(rcv_dict)
+        # print(response)
 
         new_response_lst = []
         for station in response:
-            new_station = dict()
-            new_station['username'] = self.parent.db_users.get_general_user_info(station['user_id'])['username']
-            new_station['type'] = back_rcv_stations[station['type_id']]
-            new_station['categories'] = [back_category_types[category_id] for category_id in station['categories']]
-            new_station['time_from'] = station['time_from']
-            new_station['time_to'] = station['time_to']
-            new_station['locations'] = []
-            for loc in station['locations']:
-                loc_info = self.parent.db_locations.get_location_info(cities[rcv_station_dict['city']], loc)
-                new_station['locations'].append((loc_info['latitude', 'longitude']))
-            new_station['description'] = station['description']
-            new_response_lst.append(station)
+            if station is not None:
+                new_station = dict()
+                print(station)
+                new_station['organization_name'] = self.parent.db_users.get_general_user_info(response[station]['user_id'])['username']
+                # new_station['type'] = back_rcv_stations[station['type_id']]
+                # new_station['categories'] = [back_category_types[category_id] for category_id in station['categories']]
+                # new_station['time_from'] = station['time_from']
+                # new_station['time_to'] = station['time_to']
+                # new_station['locations'] = []
+                for loc in response[station]['locations']:
+                    loc_info = self.parent.db_locations.get_location_info(cities[rcv_station_dict['city']], loc)
+                    new_station['lat'] = loc_info['latitude']
+                    new_station['lng'] = loc_info['longitude']
+                    new_station['needs'] = ', '.join([back_category_types[category_id] for category_id
+                                                      in response[station]['categories']])
+                    new_station['url'] = '#'
+                    # new_station['locations'].append((loc_info['latitude', 'longitude']))
+                # new_station['description'] = station['description']
+                new_response_lst.append(new_station)
 
+        # print(new_response_lst)
         return new_response_lst
 
     def get_receive_stations(self, rcv_station_dict):
@@ -94,7 +103,9 @@ class DBMap(DBBase):
                                                     description: str}
         """
         response = self.db.get("receive_stations", None)
-        return list(filter(lambda x: self.checking(rcv_station_dict, x), response))
+        # print(response)
+        return response
+        # return list(filter(lambda x: self.checking(rcv_station_dict, x), response))
 
     def checking(self, user_station, station):
         """

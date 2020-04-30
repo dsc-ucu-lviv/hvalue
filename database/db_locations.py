@@ -1,4 +1,5 @@
 from database.db_base import DBBase
+import numpy as np
 
 
 class DBLocations(DBBase):
@@ -74,6 +75,7 @@ class DBLocations(DBBase):
         self.db.put('{}/{}'.format(self.t_locations, city_id),
                     self.get_last_id('{}/{}'.format('location_id', city_id)),
                     new_location_dict)
+        return self.get_last_id('{}/{}'.format('location_id', city_id))
 
     def get_coordinates_from_address(self, city_id, address):
         """
@@ -84,7 +86,11 @@ class DBLocations(DBBase):
         self._get_city_name(city_id)
         # TODO (issue #33): return right coordinates
         # Return some error or default coordinates, if the address is invalid
-        return (49.841888, 24.030108)
+        #49.806413 - 49.843623, 23.93 - 24.094
+        print((np.random.uniform(low=49.806413, high=49.843623),
+                np.random.uniform(low=23.93, high=24.094)))
+        return (np.random.uniform(low=49.806413, high=49.843623),
+                np.random.uniform(low=23.93, high=24.094))
 
     def _get_city_name(self, city_id):
         """

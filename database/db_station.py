@@ -21,16 +21,19 @@ class DBStation(DBBase):
         if 'phone_number' not in user_info:
             user_info['phone_number'] = None
         user_info['stations'] = self.get_stations(user_id)
+        # print(user_info['stations'])
         return user_info
 
     def get_stations(self, user_id):
         all_stations = self.db.get("receive_stations", None)
+        # print(all_stations)
         return_stations = []
         for st in all_stations:
-            if st['user_id'] == user_id:
-                loc = self.parent.db_locations(0, st['locations'][0])
-                return_stations.append({'name': st['name'], 'address': loc['address'],
-                                        'categories': [back_category_types[type] for type in st['categories']]})
+            print(st)
+            if all_stations[st]['user_id'] == user_id:
+                loc = self.parent.db_locations.get_location_info(0, all_stations[st]['locations'][0])
+                return_stations.append({'name': all_stations[st]['name'], 'address': loc['address'],
+                                        'categories': [back_category_types[type] for type in all_stations[st]['categories']]})
         return return_stations
 
     def add_easy_rcv_station(self, station_dict):
@@ -38,6 +41,7 @@ class DBStation(DBBase):
         Add station directly to database.
         :param station_dict: = {'user_id': int,
                                 'type_id': int,
+                                'name': str,
                                 'categories': list(int),
                                 'address': str,
                                 'time_from': str,
@@ -48,8 +52,9 @@ class DBStation(DBBase):
         loc_id = self.parent.db_locations.add_new_location({'city_id': 0, "address": station_dict['address']})
         new_station_dict = {'user_id': station_dict['user_id'],
                             'type_id': station_dict['type_id'],
+                            'name': station_dict['name'],
                             'categories': station_dict['categories'],
-                            'locations': [loc_id],
+                            'locations': {0: loc_id},
                             'time_from': station_dict['time_from'],
                             'time_to': station_dict['time_to'],
                             'description': station_dict['description']}

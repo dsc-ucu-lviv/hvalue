@@ -19,11 +19,13 @@ def profile_org():
     if request.method == "POST":
         return "?"
     if database.db.profile_info is not None:
-        org_stations = database.db.db.db_station.get_profile_info(database.db.profile_info["user_id"]) or []
+        org_stations = database.db.db.db_station.get_profile_info(database.db.profile_info["user_id"])['stations'] or []
         org_profile = {'org_name': database.db.profile_info['username'],
                        'org_type': database.db.profile_info['type_id'],
                        'email': database.db.profile_info.get('email'),
                        'phone_number': database.db.profile_info.get('phone_number'),
                        'num_stations': len(org_stations) if org_stations else 0}
-        return render_template("profile_org.html", org=org_profile, stations=org_stations)
+        return render_template("profile_org.html", org=org_profile, stations=org_stations,
+                               profile_info=database.db.profile_info)
+
     return redirect(_redirect_url())

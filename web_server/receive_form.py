@@ -11,6 +11,8 @@ category_types = {'Money': 0, 'Clothes': 1, 'Food': 2}
 
 @receive_form_page.route("/receive-form", methods=["GET", "POST"])
 def get_data():
+    if database.db.profile_info is None:
+        return redirect(url_for('login.login'))
     if request.method == "POST":
         if request.form.get("address"):
             if request.form.get("city") and request.form.get("time_to")\
@@ -29,6 +31,7 @@ def get_data():
                      'categories': [category_types[type] for type in request.form.getlist("categories")],
                      'address': request.form.get('address'),
                      'time_from': request.form.get('time_to'),
+                     'name': request.form.get('name'),
                      'time_to': request.form.get('time_out'),
                      'description': request.form.get('description')})
                 # return redirect(url_for('map.map'))
