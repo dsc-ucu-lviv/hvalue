@@ -4,34 +4,37 @@
 
 
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <main class="new_task_box">
+    <aside class="profile_card">
+        <img class="profile_image"
+             src="https://firebasestorage.googleapis.com/v0/b/hvalue-310c1.appspot.com/o/mockups%2Fcorgi.jpg?alt=media&token=54c9b75b-74f5-45c3-b108-02ec89101bd7"
+             alt="corgi"
+             width="80%"
+             height="35%"
+             aria-label="photo of two corgies">
+        <h2>{{org_name}}</h2>
+        <h3>{{org_type}}</h3>
+        <p> <span class="title">Receive stations</span> <span> {{org.num_stations}}</span></p>
+        {% if org and org.phone_number %}
+            <p> <span class="title">Phone number</span> <span>{{org.phone_number}}</span></p>
+        {% endif %}
+        <p> <span class="title">E-mail</span> <span>{{org.email}}</span></p>
+    </aside>
+
+    <main class="profile_page">
+
         <form action="{{ url_for('receive-form.get_data') }}" method="POST">
-            <div class="profile_card">
-                <img class="profile_image"
-                     src="https://firebasestorage.googleapis.com/v0/b/hvalue-310c1.appspot.com/o/mockups%2Fcorgi.jpg?alt=media&token=54c9b75b-74f5-45c3-b108-02ec89101bd7"
-                     alt="corgi"
-                     width="80%"
-                     height="35%"
-                     aria-label="photo of two corgies">
-                <h2>{{org_name}}</h2>
-                <h3>{{org_type}}</h3>
-                <p> <span class="title">Receive stations</span> <span> {{org.num_stations}}</span></p>
-                {% if org and org.phone_number %}
-                    <p> <span class="title">Phone number</span> <span>{{org.phone_number}}</span></p>
-                {% endif %}
-                <p> <span class="title">E-mail</span> <span>{{org.email}}</span></p>
-            </div>
             <button class="add_button">+</button>
-
-        {% for station in stations %}
-            <div class="point_card">
-                <h2>{{ station.name }}</h2>
-                <p class="point_text"></p>
-                <p class="point_text"><i class='fas fa-map-marker-alt'></i>{{ station.address }}</p>
-                <p class="point_text">{{ ' | '.join(station.categories) }}</p>
-            </div>
-        {% endfor %}
-
         </form>
+
+        <div class="stations_list">
+            {% for station in stations %}
+                <div class="point_card">
+                    <h2>{{ station.name }}</h2>
+                    <p class="point_text"><i class='fas fa-map-marker-alt'></i>{{ station.address }}</p>
+                    <p class="point_text">{{ ' | '.join(station.categories) }}</p>
+                </div>
+            {% endfor %}
+        </div>
+
     </main>
 {% endblock %}

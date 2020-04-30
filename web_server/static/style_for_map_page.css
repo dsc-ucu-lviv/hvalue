@@ -1,7 +1,7 @@
 aside 
 {
     float: left;
-    width: 300px;
+    width: 30%;
     color: var(--light-powder);
 
     font-family: 'Times New Roman', Times, serif;
@@ -51,3 +51,11 @@ aside
     margin-right: 10px;
 }
 
+div#map {
+    position: absolute;
+    left: 31%;
+    right: 3%;
+    height: 85vh;
+    width: calc(100% - 31% - 2%);
+    overflow: auto;
+}
