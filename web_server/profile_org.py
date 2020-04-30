@@ -15,14 +15,14 @@ def _redirect_url(default='login.login'):
 
 
 @profile_org_page.route("/profile_org", methods=["GET", "POST"])
-def profile_org():
+def profile_org(user_id=None):
     if request.method == "POST":
         return "?"
     if database.db.profile_info is not None:
         org_stations = database.db.db.db_station.get_profile_info(database.db.profile_info["user_id"])['stations'] or []
         org_types_mapping = ['Orphanage', 'Shelter', 'Charitable', 'Others']
         org_profile = {'org_name': database.db.profile_info['username'],
-                       'org_type': org_types_mapping[database.db.profile_info['type_id']],
+                       'org_type': org_types_mapping[int(database.db.profile_info['type_id'])],
                        'email': database.db.profile_info.get('email'),
                        'phone_number': database.db.profile_info.get('phone_number'),
                        'num_stations': len(org_stations) if org_stations else 0}

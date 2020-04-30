@@ -95,7 +95,7 @@ class DBMap(DBBase):
         """
         response = self.db.get("receive_stations", None)
         print('real_response', response)
-        return list(filter(lambda x: self.checking(rcv_station_dict, x), response.values()))
+        return list(filter(lambda x: self.checking(rcv_station_dict, x), response))
 
     def checking(self, user_station, station):
         """
@@ -105,6 +105,9 @@ class DBMap(DBBase):
         :param station:  dict = {(str): list, (str): (int), (str): (str), ...}
         :return: list = [(dict), ...]
         """
+        if station is None:
+            return False
+
         user_set = set(user_station['categories'])
         database_set = set(station['categories'])
 

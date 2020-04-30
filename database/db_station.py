@@ -30,10 +30,10 @@ class DBStation(DBBase):
         return_stations = []
         for st in all_stations:
             print(st)
-            if all_stations[st]['user_id'] == user_id:
-                loc = self.parent.db_locations.get_location_info(0, all_stations[st]['locations'][0])
-                return_stations.append({'name': all_stations[st]['name'], 'address': loc['address'],
-                                        'categories': [back_category_types[type] for type in all_stations[st]['categories']]})
+            if st and st['user_id'] == user_id:
+                loc = self.parent.db_locations.get_location_info(0, st['locations'][0])
+                return_stations.append({'name': st['name'], 'address': loc['address'],
+                                        'categories': [back_category_types[type] for type in st['categories']]})
         return return_stations
 
     def add_easy_rcv_station(self, station_dict):
