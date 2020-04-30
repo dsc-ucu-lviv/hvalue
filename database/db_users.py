@@ -17,7 +17,8 @@ class DBAuth(DBBase):
         Create new user in database.
         user_dict = {'email': str,
                      'password': str,
-                     'username': str}
+                     'username': str,
+                     'type_id': int}
         :return: user_id / Error
         - IndexError
         - UserAlreadyExists
@@ -31,11 +32,13 @@ class DBAuth(DBBase):
         except UserDoesNotExists:
             pass
 
+        print(user_dict)
+
         # In case there are other irrelevant keys in user_dict -> creating new dict
         new_user_dict = {'email': user_dict['email'],
                          'password': self._hash_password(user_dict['password']),
                          'username': user_dict['username'],
-                         'type_id': 0}
+                         'type_id': user_dict['type_id']}
 
         self.increase_last_id('user_id')
         self.db.put(self.t_users, self.get_last_id('user_id'), new_user_dict)
@@ -131,6 +134,7 @@ class DBAuth(DBBase):
                          'username': str,
                          'email': str,
                          'password': str,
+                         'type_id': int,
                          ? 'phone_number': str} / Error
         - UserDoesNotExists
         """

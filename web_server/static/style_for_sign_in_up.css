@@ -55,3 +55,13 @@ button{
 .sign_up_in-link{
     font-size: 1.1em;
 }
+
+.column {
+    display: flex;
+    flex-direction: column;
+    font-size: 90%;
+    padding: 2%;
+    /*margin: 0px 0px -22px 0px;*/
+    flex-basis: 100%;
+    flex: 1
+}
