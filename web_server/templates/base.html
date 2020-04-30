@@ -26,27 +26,26 @@
 
         <div class="profile_info">
 
-            {% if profile_info is defined %}
-                <p class="profile_info__name"> {{ profile_info['profile_name'] }} </p>
-                <details>
-                    <summary>
-                        <img class="profile_info__photo"
-                             src="{{ profile_info['profile_img_link'] }}"
-                             alt="Profile photo."
-                             aria-label="Profile photo"/>
-                    </summary>
-                    <nav>
-                        <ul>
-                            {# todo(issue_#23) - Add navigation options for signed-in user. #}
-                            {# <li> <a href="#"> ... </a> </li> #}
-                        </ul>
-                    </nav>
-                </details>
-
-            {% else %}
+            {% if profile_info is none or profile_info is undefined %}
                 <a class="text-link" href = "{{ url_for('registration.registration') }}">Sign up</a>
                 <a class="text-link" href = "{{ url_for('login.login') }}">Log in</a>
 
+            {% else %}
+
+                <p class="profile_info__name"> {{ profile_info['username'] }} </p>
+                <details>
+                    <summary>
+                        <i class="material-icons person-64 profile_info__icon"
+                           aria-label="Default profile icon"> person </i>
+                    </summary>
+                    <nav>
+                        <ul>
+                            <li> <a href="{{ url_for('receive-form.get_data') }}"> Add new receiver station </a> </li>
+                            <li> <a href="#"> My profile </a> </li>
+                            <li> <a href="{{ url_for('login.log_out') }}"> Log out </a> </li>
+                        </ul>
+                    </nav>
+                </details>
             {% endif %}
         </div>
     </header>

@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 import json
+import database.db
 
 map_page = Blueprint('map', __name__, template_folder='templates')
 
@@ -12,4 +13,5 @@ def map():
                               "needs": 'help', "url": 'https://cms.ucu.edu.ua/course/view.php?id=2348'}]
 
     return render_template("map.html", coords=companies_information,
-                           city_center_coords={"lat": 49.8397, "lng": 24.0297})
+                           city_center_coords={"lat": 49.8397, "lng": 24.0297},
+                           profile_info=database.db.profile_info)

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
+import database.db
 
 receive_form_page = Blueprint('receive-form', __name__, template_folder='templates')
 
@@ -20,9 +21,9 @@ def get_data():
                 # return input_data
             else:
                 error = 'enter all information'
-                return render_template('add_receive_station.html', error=error)
+                return render_template('add_receive_station.html', error=error, profile_info=database.db.profile_info)
         else:
             error = 'enter all information'
-            return render_template('add_receive_station.html', error=error)
+            return render_template('add_receive_station.html', error=error, profile_info=database.db.profile_info)
 
-    return render_template("add_receive_station.html")
+    return render_template("add_receive_station.html", profile_info=database.db.profile_info)

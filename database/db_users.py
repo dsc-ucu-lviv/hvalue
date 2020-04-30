@@ -44,13 +44,15 @@ class DBAuth(DBBase):
         Check if user password is correct.
         user_dict = {'email': str,
                      'password': str}
-        :return: user_id / Error
+        :return: user_id / False / Error
         - UserDoesNotExists
         """
         # In case user does not exists, line below will raise error
         user_id = self._get_user_id_by_email(email)
 
-        return self.check_user_password_by_id(user_id, password)
+        if self.check_user_password_by_id(user_id, password):
+            return user_id
+        return False
 
     def check_user_password_by_id(self, user_id, password):
         """

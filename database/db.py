@@ -20,3 +20,5 @@ class Database:
 
 
 db = Database()
+
+profile_info = None

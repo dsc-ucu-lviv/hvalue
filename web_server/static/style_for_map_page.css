@@ -15,6 +15,7 @@ aside
 
 .map_page-content{
     margin: 20px 50px 20px 0;
+    display: flex;
 }
 
 .section_item{
