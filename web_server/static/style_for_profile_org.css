@@ -57,9 +57,10 @@ span{
     border-radius: 50%;
 }
 
-image{
-    width: 15%;
-    height: 15%;
+
+img.profile_image{
+    width: 100%;
+    height: auto;
 }
 
 i{
@@ -75,4 +76,9 @@ i{
     background-color: #6962E0;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
+}
+
+i.fas.fa-map-marker-alt{
+    margin-right: 3%;
+    margin-left: 3%;
 }

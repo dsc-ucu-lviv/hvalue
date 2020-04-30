@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block main %}
+
+
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <main class="new_task_box">
         <form action="{{ url_for('profile_org.profile_org') }}" method="POST">
@@ -13,18 +15,23 @@
                      aria-label="photo of two corgies">
                 <h2>{{org_name}}</h2>
                 <h3>{{org_type}}</h3>
-                <p> <span class="title">Receive stations</span> <span> {{num_stations}}</span></p>
-                <p> <span class="title">Phone number</span> <span>{{phone_number}}</span></p>
-                <p> <span class="title">E-mail</span> <span>{{email}}</span></p>
+                <p> <span class="title">Receive stations</span> <span> {{org.num_stations}}</span></p>
+                {% if org and org.phone_number %}
+                    <p> <span class="title">Phone number</span> <span>{{org.phone_number}}</span></p>
+                {% endif %}
+                <p> <span class="title">E-mail</span> <span>{{org.email}}</span></p>
             </div>
             <button class="add_button">+</button>
 
+        {% for station in stations %}
             <div class="point_card">
-                <h2>Prytuloc</h2>
-                <p class="point_text">{{name_stations[0]}}</p>
-                <p class="point_text"><i class='fas fa-map-marker-alt'></i>{{addresses[0]}}</p>
-                <p class="point_text">{{', '.join(categories)}}</p>
+                <h2>{{ station.name }}</h2>
+                <p class="point_text"></p>
+                <p class="point_text"><i class='fas fa-map-marker-alt'></i>{{ station.addresses }}</p>
+                <p class="point_text">{{ ' | '.join(station.categories) }}</p>
             </div>
+        {% endfor %}
+
         </form>
     </main>
 {% endblock %}
