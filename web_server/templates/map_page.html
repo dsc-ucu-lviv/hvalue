@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+        <aside> 
+            <form action="" methods="">
+
+            <section class="section city">
+                <h3 class="section_title">  Місто </h3>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <input list="brow">
+                <datalist id="brow" class="desk">
+                    <option value="Львів">
+                    <option value="Київ">
+                    <option value="Харків">
+                    <option value="Одеса">
+                    <option value="Чернівці">
+                </datalist>
+
+            </section>
+
+            <section class="section receiver">
+
+                    <h3 class="section_title"> Отримувач </h3>
+
+                <div class="section_item">
+                    <label class="container">Контейнер</label>
+                    <input type="checkbox">
+                </div>
+
+                <div class="section_item">
+                    <label class="container">Організація</label>
+                    <input type="checkbox">
+                </div>
+
+            </section>
+
+
+                Організація
+                <label class="container">Дитячий будинок
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="container">Притулок для тварин
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="container">Благодійна Організація
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                </label>
+
+                <label class="container">Інше
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+
+
+                Пожертва
+                <label class="container">Одяг
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                </label>
+
+                <label class="container">Гроші
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="container">Їжа
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+
+                <!--<button></button>-->
+
+            </form>
+
+
+        </aside>
+
+        
+        <!--<map>-->
+        <!--<p> Пункти прийняття пожертв: </p>-->
+        <!--<iframe frameboarder="1" height="900" width="900" src="Map.jpg" name="ouriframe" id="ouriframe">-->
+        <!---->
+        <!--</iframe> </br>-->
+        <!--</map>-->
+
+{% endblock %}

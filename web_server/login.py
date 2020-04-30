@@ -1,23 +1,24 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 
 from database.db import db
-import database.db_base as db_error
+import database.db_auth as db_auth
 
 login_page = Blueprint('login', __name__, template_folder='templates')
 
 
-@login_page.route("/", methods=["GET", "POST"])
+@login_page.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         if request.form.get("email"):
+            user_dict = {"email": request.form.get("email"),
+                         "password": request.form.get("password")}
             try:
-                if db.db_users.check_user_password_by_email(request.form.get("email"),
-                                                            request.form.get("password")):
+                if db.db_auth.check_user_password(user_dict) is not None:
                     return redirect(url_for('login.hello'))
                 else:
                     error = 'enter right password'
                     return render_template('login.html', error=error)
-            except db_error.UserDoesNotExists:
+            except db_auth.UserDoesNotExists:
                 error = 'user does not exist'
                 return render_template('login.html', error=error)
         else:
@@ -29,4 +30,4 @@ def login():
 
 @login_page.route("/hello", methods=['GET'])
 def hello():
-    return render_template("add_receive_station.html")
+    return render_template("map_page.html")
