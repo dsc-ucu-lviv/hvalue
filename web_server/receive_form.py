@@ -34,7 +34,7 @@ def get_data():
                      'name': request.form.get('name'),
                      'time_to': request.form.get('time_out'),
                      'description': request.form.get('description')})
-                # return redirect(url_for('map.map'))
+                return redirect(url_for('profile_org.profile_org'))
             else:
                 error = 'enter all information'
                 return render_template('add_receive_station.html', error=error, profile_info=database.db.profile_info)
