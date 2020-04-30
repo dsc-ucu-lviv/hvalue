@@ -13,10 +13,10 @@ class Database:
         self.database = firebase.FirebaseApplication(keys.database_name,
                                                      authentication=None)
 
-        self.db_users = DBAuth(self.database)
-        self.db_map = DBMap(self.database)
-        self.db_station = DBStation(self.database)
-        self.db_locations = DBLocations(self.database)
+        self.db_users = DBAuth(self.database, self)
+        self.db_map = DBMap(self.database, self)
+        self.db_station = DBStation(self.database, self)
+        self.db_locations = DBLocations(self.database, self)
 
 
 db = Database()

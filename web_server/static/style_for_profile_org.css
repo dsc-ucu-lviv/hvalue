@@ -1,0 +1,78 @@
+.profile_card {
+    left: 0%;
+    position: absolute;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    height: 100%;
+    width: 30%;
+    color: black    ;
+}
+
+.point_card {
+    left: 30%;
+    top: 30%;
+    position: absolute;
+    border-radius: 25%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    height: 30%;
+    width: 20%;
+    color: black;
+}
+
+.title {
+    color: grey;
+    font-size: 18px;
+    text-align: left;
+}
+
+.point_text {
+    color: grey;
+    font-size: 17px;
+    text-align: center;
+}
+
+span{
+    text-align: right;
+}
+
+.add_button {
+    left: 60%;
+    top: 15%;
+    position: absolute;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 40px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #3F3A85;
+    border: none;
+    border-radius: 50%;
+}
+
+image{
+    width: 15%;
+    height: 15%;
+}
+
+i{
+    font-size: 17px;
+    color: grey;
+}
+
+.add_button:hover {
+    background-color: #6962E0;
+}
+
+.add_button:active {
+    background-color: #6962E0;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}

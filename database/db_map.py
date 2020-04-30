@@ -1,9 +1,20 @@
 from database.db_base import DBBase
 
 
+cities = {'Lviv': 0}
+rcv_station_types = {'container': 0, 'organisation': 1}
+organisation_types = {'orphanage': 0, 'shelter': 1, 'charitable': 2, 'others': 3}
+category_types = {'money': 0, 'clothes': 1, 'food': 2}
+
+back_rcv_stations = {0: 'Container', 1: 'Organisation'}
+back_org_types = {0: 'orphanage', 1: 'shelter', 2: 'charitable', 3: 'others'}
+back_category_types = {0: 'money', 1: 'clothes', 2: 'food'}
+
+
 class DBMap(DBBase):
-    def __init__(self, database):
+    def __init__(self, database, parent):
         super().__init__(database)
+        self.parent = parent
 
     def get_categories(self):
         """
@@ -29,18 +40,41 @@ class DBMap(DBBase):
         rcv_station_dict = {'city': Lviv,
                             'time_from': 01-01-2018,
                             'time_to': 01-12-2050,
-                            'type_id': ['container', 'organisation'],
-                            'organizations': ['orphanage', 'shelter', 'charitable', 'others'],
+                            'station_type': ['container', 'organisation'],
+                            'organisations': ['orphanage', 'shelter', 'charitable', 'others'],
                             'categories': ['money', 'clothes', 'food']}
-        :return: (dict) {receiver_station_type_id: {username: str,
-                                                    type: ['container', 'organisation'],
-                                                    categories: ['money', 'clothes', 'food'],
-                                                    time_from: str,
-                                                    time_to: str,
-                                                    locations: [(lat, lon)],
-                                                    description: str}
+        :return: (list) [{username: str,
+                         type: ['container', 'organisation'],
+                         categories: ['money', 'clothes', 'food'],
+                         time_from: str,
+                         time_to: str,
+                         locations: [(lat, lon)],
+                         description: str}
         """
-        pass
+        rcv_dict = {'city_id': cities[rcv_station_dict['city']],
+                    'time_from': rcv_station_dict['time_from'],
+                    'time_to': rcv_station_dict['time_to'],
+                    'type_id': [rcv_station_types[type] for type in rcv_station_dict['station_type']],
+                    'organisations': [rcv_station_types[type] for type in rcv_station_dict['organisations']],
+                    'categories': [rcv_station_types[type] for type in rcv_station_dict['categories']]}
+        response = self.get_receive_stations(rcv_dict)
+
+        new_response_lst = []
+        for station in response:
+            new_station = dict()
+            new_station['username'] = self.parent.db_users.get_general_user_info(station['user_id'])['username']
+            new_station['type'] = back_rcv_stations[station['type_id']]
+            new_station['categories'] = [back_category_types[category_id] for category_id in station['categories']]
+            new_station['time_from'] = station['time_from']
+            new_station['time_to'] = station['time_to']
+            new_station['locations'] = []
+            for loc in station['locations']:
+                loc_info = self.parent.db_locations.get_location_info(cities[rcv_station_dict['city']], loc)
+                new_station['locations'].append((loc_info['latitude', 'longitude']))
+            new_station['description'] = station['description']
+            new_response_lst.append(station)
+
+        return new_response_lst
 
     def get_receive_stations(self, rcv_station_dict):
         """
@@ -49,7 +83,7 @@ class DBMap(DBBase):
                             'time_from': str,
                             'time_to': str,
                             'type_id': list(int),
-                            'organizations': list(user_id),
+                            'organisations': list(user_id),
                             'categories': list(categories_id)}
         :return: (dict) {receiver_station_type_id: {user_id: int,
                                                     type_id: int,
@@ -85,18 +119,10 @@ class DBMap(DBBase):
         if self.compare_dates(user_station['time_to'], station['time_from']) == -1:
             return False
 
-        for location in station['locations']:
-            if user_station['city_id'] == self._get_location(location)['city_id']:
-                return True
+        # for location in station['locations']:
+        #     if user_station['city_id'] == self._get_location(location)['city_id']:
+        #         return True
         return False
-
-    def _get_location(self, location_id):
-        """
-        Return info about location
-        :param location_id: int
-        :return: dict
-        """
-        return self.db.get('locations/{}'.format(location_id), None)
 
     def _get_organization_type(self, user_id):
         return self.db.get('users/{}/type_id'.format(user_id), None)

@@ -2,8 +2,9 @@ from database.db_base import DBBase
 
 
 class DBLocations(DBBase):
-    def __init__(self, database):
+    def __init__(self, database, parent):
         super().__init__(database)
+        self.parent = parent
 
         self.t_cities = '/cities'
         self.t_locations = '/locations'
