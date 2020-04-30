@@ -65,3 +65,11 @@ button{
     flex-basis: 100%;
     flex: 1
 }
+
+select#organization {
+    width: 15.5rem;
+    height: 1.75rem;
+    margin: 0.1rem 0;
+    background-color: white;
+    font-size: larger;
+}
