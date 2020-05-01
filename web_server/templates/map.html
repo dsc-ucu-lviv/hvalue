@@ -1,0 +1,58 @@
+{% extends "map_page.html" %}
+
+{% block map %}
+
+    <div id="map"></div>
+    <script type="text/javascript">
+        function initMap() {
+            let cityCenterCoords ='{{ city_center_coords | tojson | safe }}';
+            cityCenterCoords = JSON.parse(cityCenterCoords);
+
+            let map = new google.maps.Map(
+              document.getElementById('map'), {
+                    zoom: 12,
+                    center: cityCenterCoords
+                });
+
+            const stationsData ='{{ coords | tojson | safe }}';
+            const stationsDataArr = JSON.parse(stationsData);
+
+            let markersArr = Array.from(stationsDataArr, (station) => new google.maps.Marker({
+                    position: {lat: station.lat, lng: station.lng},
+                    map: map,
+                    title: station.organization_name
+                })
+            );
+
+            let infoWindowsArr = Array.from(stationsDataArr, (station) => new google.maps.InfoWindow({
+                content: '<div id="content">'+
+                  '<div id="siteNotice">'+
+                  '</div>'+
+                  '<div id="bodyContent">'+
+                  `<p><b>Organization: </b> ${station.organization_name} </p>` +
+                  `<p><b>Needs: </b> ${station.needs} </p>` +
+                    '<style>' +
+                        '.text {' +
+                        'text-align:  right;}' +
+                    '</style>' +
+                  `<p class="text-align"><a href='${station.url}'>`+
+                  'Organization website</a></p>'+
+                  '</div>'+
+                  '</div>'
+                })
+            );
+
+            markersArr.forEach((marker, index) => {
+                marker.addListener(
+                    "click", function () {
+                        infoWindowsArr[index].open(map, marker);
+                    }
+                )
+            });
+    }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU2-WIyN8CLq6TFDNw2IIMrAkWYI05gFk&callback=initMap">
+        </script>
+
+{% endblock %}

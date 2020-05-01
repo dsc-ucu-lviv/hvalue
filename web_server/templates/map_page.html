@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="map_page-content">
+
+        <aside>
+            <form class="map_page-form" action="{{ url_for('map.map') }}" method="POST">
+
+            <section class="section city">
+
+                <div class="section_item">
+                    <h3 class="section_title">  City </h3>
+
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                    <input name="city_input" class="city_input" list="brow">
+                    <datalist id="brow" class="desk">
+                        <option value="Lviv">
+                        <option value="Kyiv">
+                    </datalist>
+
+                </div>
+
+            </section>
+
+            <section class="section receiver">
+
+                    <h3 class="section_title"> Receiver type</h3>
+
+                <div class="section_item">
+                    <input name="station_type" value="container" class="checkbox" type="checkbox">
+                    <label class="container">Container</label>
+                </div>
+
+                <div class="section_item">
+                    <input name="station_type" value="organisation" class="checkbox" type="checkbox">
+                    <label class="container">Organization</label>
+                </div>
+
+            </section>
+
+
+            <section class="section organization">
+                <h3 class="section_title"> Organization </h3>
+
+                <div class="section_item">
+                    <input name="organization" value="orphanage" class="checkbox" type="checkbox">
+                    <label class="container">Orphanage</label>
+                </div>
+
+                <div class="section_item">
+                    <input name="organization" value="shelter" class="checkbox" type="checkbox">
+                    <label class="container">Shelter for animals</label>
+                </div>
+
+                <div class="section_item">
+                    <input name="organization" value="charitable" class="checkbox" type="checkbox">
+                    <label class="container">Charitable Organization</label>
+                </div>
+
+                <div class="section_item">
+                    <input name="organization" value="other" class="checkbox" type="checkbox">
+                    <label class="container">Other</label>
+                </div>
+
+            </section>
+
+            <section class="section donation">
+                <h3 class="section_title"> Donation </h3>
+
+                <div class="section_item">
+                    <input name="donation" value="money" class="checkbox" type="checkbox">
+                    <label class="container">Money</label>
+                </div>
+
+                <div class="section_item">
+                    <input name="donation" value="clothes" class="checkbox" type="checkbox">
+                    <label class="container">Clothes</label>
+                </div>
+
+                <div class="section_item">
+                    <input name="donation" value="food" class="checkbox" type="checkbox">
+                    <label class="container">Food</label>
+                </div>
+
+                <button class="map_page-form_button" type="submit" aria-label="Next">Update</button>
+            </section>
+
+            </form>
+
+
+        </aside>
+
+
+        {% block map %} {% endblock %}
+
+</div>
+
+{% endblock %}

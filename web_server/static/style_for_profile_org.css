@@ -1,0 +1,93 @@
+main.profile_page {
+    margin: 0;
+    display: inherit;
+    width: 100%;
+    flex-flow: row;
+}
+
+aside.profile_card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    text-align: center;
+    height: 100%;
+    width: 30%;
+    color: black    ;
+    background-color: white;
+}
+
+.point_card {
+    border-radius: 2rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    min-width: 20%;
+    text-align: center;
+    padding: 0 2rem;
+    color: black;
+}
+
+div.stations_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+div.stations_list > .point_card {
+    margin: 2rem;
+}
+
+.title {
+    color: grey;
+    font-size: 18px;
+    text-align: left;
+}
+
+.point_text {
+    color: grey;
+    font-size: 17px;
+    text-align: center;
+    min-width: 8rem;
+}
+
+span{
+    text-align: right;
+}
+
+button.add_button {
+    display: inline-block;
+    padding: 15px 25px;
+    margin: 3%;
+    font-size: 40px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #3F3A85;
+    border: none;
+    border-radius: 50%;
+}
+
+
+img.profile_image{
+    width: 100%;
+    height: auto;
+}
+
+i{
+    font-size: 17px;
+    color: grey;
+}
+
+.add_button:hover {
+    background-color: #6962E0;
+}
+
+.add_button:active {
+    background-color: #6962E0;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+i.fas.fa-map-marker-alt{
+    margin-right: 3%;
+    margin-left: 3%;
+}

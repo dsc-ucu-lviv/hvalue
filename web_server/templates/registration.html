@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='style.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='color_definitions.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='style_for_sign_in_up.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="//fonts.googleapis.com/css?family=EB+Garamond" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <title>Hvalue</title>
+</head>
+<body>
+
+<div class="content">
+
+    <main class="main">
+        <!-- todo(issue_#24) - Add link to the overview page. #-->
+        <a href="#">
+            <img class="logo"
+                 src="https://firebasestorage.googleapis.com/v0/b/hvalue-310c1.appspot.com/o/mockups%2Flogo2.png?alt=media&token=4fa7a778-94e5-40c1-b9b9-1b8d8178c7bf"
+                 alt="logo"
+                 aria-label="logo of H-Value organization"> </a>
+
+        <div class="sign_in_up">
+
+            <h1> Sign up</h1>
+
+            <form class="sign_in_up-form" action="{{ url_for('registration.registration') }}" method="POST">
+                <input class="form_item"
+                       name="name"
+                       type="text"
+                       placeholder="username"
+                       aria-label="username"
+                       autocomplete="off"/>
+
+                <input class="form_item"
+                       name="email"
+                       type="text"
+                       placeholder="email"
+                       aria-label="email"
+                       autocomplete="off"/>
+
+                <div class="column">
+                    <select id="organization" name="organization">
+                    <option value="0">Orphanage</option>
+                    <option value="1">Shelter for animals</option>
+                    <option value="2" selected="selected">Charitable Organization</option>
+                    <option value="3">Other</option>
+                    </select>
+                </div>
+
+                <input class="form_item"
+                       name="password1"  type="password" placeholder="password"  aria-label="password" />
+
+                <input class="form_item"
+                       name="password2"  type="password" placeholder="password"  aria-label="password" />
+
+
+                {% if error %}
+                <label class="error form_item"><strong>Error:</strong> {{ error }}</label>
+                {% endif %}
+
+                <button class="form_item" type="submit" aria-label="Next"> Sign up </button>
+            </form>
+
+            <div class="sign_up_in-link sign_up-link">
+                Already have an account?
+                <a href = "{{ url_for('login.login') }}">Sign in</a>
+            </div>
+        </div>
+    </main>
+
+    <img class="main_image"
+         src="https://firebasestorage.googleapis.com/v0/b/hvalue-310c1.appspot.com/o/mockups%2Fcorgi.jpg?alt=media&token=54c9b75b-74f5-45c3-b108-02ec89101bd7"
+         alt="corgi"
+         aria-label="photo of two corgies">
+
+</div>
+</body>
+
+</html>
